@@ -1,14 +1,31 @@
-import React, { Children } from 'react';
+import React from 'react';
 import { createContext, useState } from 'react';
 
-const SignUpContext = createContext();
+export const SignUpContext = createContext();
 
-const SignUpContextProvider = ({ children }) => {
+export const SignUpContextProvider = ({ children }) => {
   const [signUpInfo, setSignUpInfo] = useState({});
-  const onNext = ({ id, password, nickName, age, weight, height }) => {};
+  const updateSignUpInfo = ({
+    id,
+    password,
+    nickName,
+    age,
+    weight,
+    height,
+  }) => {
+    const info = {
+      id: id,
+      password: password,
+      nickName: nickName,
+      age: age,
+      weight: weight,
+      height: height,
+    };
+    setSignUpInfo(info);
+  };
 
   return (
-    <SignUpContext.Provider value={{ signUpInfo, setSignUpInfo }}>
+    <SignUpContext.Provider value={{ signUpInfo, updateSignUpInfo }}>
       {children}
     </SignUpContext.Provider>
   );

@@ -5,12 +5,24 @@
 import React from 'react';
 import { StyleSheet, View, Text, TextInput } from 'react-native';
 
-const MaterialInput = ({ label, placeholder, children, caption }) => {
+const MaterialInput = ({
+  label,
+  placeholder,
+  children,
+  caption,
+  value,
+  onChangeText,
+}) => {
   return (
     <View>
       <View style={styles.block}>
         <Text style={styles.label}>{label}</Text>
-        <TextInput style={styles.input} placeholder={placeholder}>
+        <TextInput
+          style={styles.input}
+          placeholder={placeholder}
+          onChangeText={onChangeText}
+          value={value}
+        >
           {children}
         </TextInput>
       </View>
