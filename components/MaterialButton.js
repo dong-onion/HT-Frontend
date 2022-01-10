@@ -1,3 +1,6 @@
+/* 1월 7일 허준서
+회원가입 화면에서 사용하려고 만든 버튼입니다. */
+
 import React from 'react';
 import { StyleSheet, Text, Pressable } from 'react-native';
 

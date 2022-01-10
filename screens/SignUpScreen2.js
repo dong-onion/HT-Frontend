@@ -1,9 +1,14 @@
+/* 1월 7일 허준서
+회원가입 두번째 화면입니다.
+react-native-keyboard-aware-scroll-view 라이브러리가 사용되었습니다. */
+
 import React, { useContext, useState } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import MaterialButton from '../components/MaterialButton';
 import MaterialInput from '../components/MaterialInput';
 import ProfileImage from '../components/ProfileImage';
 import { SignUpContext } from '../components/SignUpContext';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 const SignUpScreen2 = () => {
   const { signUpInfo, updateSignUpInfo } = useContext(SignUpContext);
@@ -18,7 +23,7 @@ const SignUpScreen2 = () => {
   };
 
   return (
-    <View style={styles.block}>
+    <KeyboardAwareScrollView contentContainerStyle={styles.block}>
       <ProfileImage />
       <MaterialInput
         label="닉네임"
@@ -46,7 +51,7 @@ const SignUpScreen2 = () => {
         onChangeText={setHeight}
       />
       <MaterialButton onPress={onPress}>회원가입 완료</MaterialButton>
-    </View>
+    </KeyboardAwareScrollView>
   );
 };
 
@@ -54,7 +59,7 @@ const styles = StyleSheet.create({
   block: {
     justifyContent: 'space-around',
     alignItems: 'center',
-    flex: 1,
+    height: 600,
   },
 });
 
