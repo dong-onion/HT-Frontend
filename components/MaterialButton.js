@@ -4,10 +4,10 @@
 import React from 'react';
 import { StyleSheet, Text, Pressable } from 'react-native';
 
-const MaterialButton = ({ children, onPress }) => {
+const MaterialButton = ({ children, onPress, marginB }) => {
   return (
     <Pressable
-      style={styles.block}
+      style={[styles.block, marginB && styles.marginB]}
       android_ripple={{ color: 'gray' }}
       onPress={onPress}
     >
@@ -25,6 +25,9 @@ const styles = StyleSheet.create({
     elevation: 5,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  marginB: {
+    marginBottom: 20,
   },
 });
 
