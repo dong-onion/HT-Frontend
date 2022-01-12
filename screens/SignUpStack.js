@@ -7,6 +7,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import SignUpScreen1 from './SignUpScreen1';
 import SignUpScreen2 from './SignUpScreen2';
 import { SignUpContextProvider } from '../components/SignUpContext';
+import SignInScreen from './SignInScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -14,6 +15,12 @@ const SignUpStack = () => {
   return (
     <SignUpContextProvider>
       <Stack.Navigator>
+        <Stack.Screen
+          name="signIn"
+          options={{ headerShown: false }}
+          component={SignInScreen}
+        />
+        <Stack.Screen name="signUp" component={SignUpScreen1} />
         <Stack.Screen
           name="SignUpScreen-First"
           component={SignUpScreen1}

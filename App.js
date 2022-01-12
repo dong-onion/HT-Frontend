@@ -6,8 +6,8 @@ import SignInStack from './screens/SignInStack';
 const App = () => {
   return (
     <NavigationContainer>
-      {/* <SignUpStack /> */}
-      <SignInStack />
+      <SignUpStack />
+      {/* <SignInStack /> */}
     </NavigationContainer>
   );
 };
