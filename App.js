@@ -1,7 +1,5 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import SignUpStack from './screens/SignUpStack';
-import FollowTopTab from './screens/FollowTopTab';
 import RootStack from './screens/RootStack';
 
 const App = () => {

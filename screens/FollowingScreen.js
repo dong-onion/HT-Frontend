@@ -1,8 +1,8 @@
 import React from 'react';
-import { View } from 'react-native';
+import FollowingList from '../components/FollowingList';
 
 const FollowingScreen = () => {
-  return <View></View>;
+  return <FollowingList />;
 };
 
 export default FollowingScreen;
