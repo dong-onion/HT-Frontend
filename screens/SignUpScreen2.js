@@ -9,8 +9,10 @@ import MaterialInput from '../components/MaterialInput';
 import ProfileImage from '../components/ProfileImage';
 import { SignUpContext } from '../components/SignUpContext';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { useNavigation } from '@react-navigation/native';
 
 const SignUpScreen2 = () => {
+  const navigation = useNavigation();
   const {
     signUpInfo,
     setContextNickname,
@@ -31,6 +33,8 @@ const SignUpScreen2 = () => {
     setContextAge(age);
     setContextWeight(weight);
     setContextHeight(height);
+
+    navigation.navigate('FollowTopTab');
   };
 
   return (
