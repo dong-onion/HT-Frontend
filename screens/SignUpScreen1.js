@@ -12,16 +12,27 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 
 const SignUpScreen = () => {
   const navigation = useNavigation();
-  const { signUpInfo, updateSignUpInfo } = useContext(SignUpContext);
+  const { signUpInfo, setContextId, setContextPassword } =
+    useContext(SignUpContext);
 
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
   const [passwordRetype, setPasswordRetype] = useState('');
 
   const onPress = () => {
-    updateSignUpInfo({ id, password });
+    console.log(signUpInfo);
+
+    setContextId(id);
+    setContextPassword(password);
+
     navigation.navigate('SignUpScreen-Second');
   };
+
+  const checkId = (cid) => {};
+
+  const checkPassword = (cpw) => {};
+
+  const checkPasswordRetype = (cpwr) => {};
 
   return (
     <KeyboardAwareScrollView contentContainerStyle={styles.block}>
@@ -30,21 +41,27 @@ const SignUpScreen = () => {
         placeholder="아이디를 입력해주세요."
         caption="중복된 아이디입니다."
         value={id}
-        onChangeText={setId}
+        onChangeText={(text) => {
+          setId(text);
+        }}
       />
       <MaterialInput
         label="Password"
         placeholder="비밀번호를 입력해주세요."
         caption="유효하지 않은 비밀번호입니다."
         value={password}
-        onChangeText={setPassword}
+        onChangeText={(text) => {
+          setPassword(text);
+        }}
       />
       <MaterialInput
         label="Re-type Password"
         placeholder="비밀번호 확인"
         caption="비밀번호가 일치하지 않습니다."
         value={passwordRetype}
-        onChangeText={setPasswordRetype}
+        onChangeText={(text) => {
+          setPasswordRetype(text);
+        }}
       />
       <MaterialButton onPress={onPress}>다음으로</MaterialButton>
     </KeyboardAwareScrollView>

@@ -11,6 +11,7 @@ const MaterialInput = ({
   caption,
   value,
   onChangeText,
+  onChange,
 }) => {
   return (
     <View>
@@ -21,6 +22,7 @@ const MaterialInput = ({
           placeholder={placeholder}
           onChangeText={onChangeText}
           value={value}
+          onChange={onChange}
         >
           {children}
         </TextInput>
