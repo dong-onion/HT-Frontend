@@ -9,17 +9,32 @@ import MaterialInput from '../components/MaterialInput';
 import ProfileImage from '../components/ProfileImage';
 import { SignUpContext } from '../components/SignUpContext';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { useNavigation } from '@react-navigation/native';
 
 const SignUpScreen2 = () => {
-  const { signUpInfo, updateSignUpInfo } = useContext(SignUpContext);
+  const navigation = useNavigation();
+  const {
+    signUpInfo,
+    setContextNickname,
+    setContextAge,
+    setContextWeight,
+    setContextHeight,
+  } = useContext(SignUpContext);
 
-  const [nickName, setNickName] = useState('');
+  const [nickname, setNickname] = useState('');
   const [age, setAge] = useState('');
   const [weight, setWeight] = useState('');
   const [height, setHeight] = useState('');
 
   const onPress = () => {
-    updateSignUpInfo({ nickName, age, weight, height });
+    console.log(signUpInfo);
+
+    setContextNickname(nickname);
+    setContextAge(age);
+    setContextWeight(weight);
+    setContextHeight(height);
+
+    navigation.navigate('FollowTopTab');
   };
 
   return (
@@ -29,8 +44,8 @@ const SignUpScreen2 = () => {
         label="닉네임"
         placeholder="닉네임을 입력해주세요."
         caption="중복된 닉네임입니다."
-        value={nickName}
-        onChangeText={setNickName}
+        value={nickname}
+        onChangeText={setNickname}
       />
       <MaterialInput
         label="나이"

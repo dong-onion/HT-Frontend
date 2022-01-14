@@ -46,7 +46,7 @@ const ProfileImage = () => {
 
 const styles = StyleSheet.create({
   block: {
-    borderRadius: 10,
+    borderRadius: 50,
     height: 100,
     width: 100,
     borderWidth: 1,
@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     alignItems: 'flex-end',
   },
-  icon: { padding: 3 },
+  icon: { padding: 0 },
 });
 
 export default ProfileImage;

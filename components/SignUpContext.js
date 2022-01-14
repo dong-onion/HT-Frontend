@@ -8,27 +8,38 @@ export const SignUpContext = createContext();
 
 export const SignUpContextProvider = ({ children }) => {
   const [signUpInfo, setSignUpInfo] = useState({});
-  const updateSignUpInfo = ({
-    id,
-    password,
-    nickName,
-    age,
-    weight,
-    height,
-  }) => {
-    const info = {
-      id: id,
-      password: password,
-      nickName: nickName,
-      age: age,
-      weight: weight,
-      height: height,
-    };
-    setSignUpInfo(info);
+
+  const setContextId = (id) => {
+    setSignUpInfo((prevState) => ({ ...prevState, id }));
+  };
+  const setContextPassword = (password) => {
+    setSignUpInfo((prevState) => ({ ...prevState, password }));
+  };
+  const setContextNickname = (nickname) => {
+    setSignUpInfo((prevState) => ({ ...prevState, nickname }));
+  };
+  const setContextWeight = (weight) => {
+    setSignUpInfo((prevState) => ({ ...prevState, weight }));
+  };
+  const setContextHeight = (height) => {
+    setSignUpInfo((prevState) => ({ ...prevState, height }));
+  };
+  const setContextAge = (age) => {
+    setSignUpInfo((prevState) => ({ ...prevState, age }));
   };
 
   return (
-    <SignUpContext.Provider value={{ signUpInfo, updateSignUpInfo }}>
+    <SignUpContext.Provider
+      value={{
+        signUpInfo,
+        setContextId,
+        setContextPassword,
+        setContextNickname,
+        setContextWeight,
+        setContextHeight,
+        setContextAge,
+      }}
+    >
       {children}
     </SignUpContext.Provider>
   );
