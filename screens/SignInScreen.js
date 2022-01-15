@@ -28,7 +28,7 @@ const SignInScreen = ({ navigation }) => {
         <MaterialButton marginB={true} children={'로그인'} />
         <MaterialButton
           children={'회원가입'}
-          onPress={() => navigation.navigate('signUp')}
+          onPress={() => navigation.navigate('SignUpStack')}
         />
       </View>
     </View>
