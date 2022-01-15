@@ -3,7 +3,7 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import SignUpStack from './SignUpStack';
-import SignInScreen from './SignInScreen';
+import SignInStack from './SignInStack';
 import FollowTopTab from './FollowTopTab';
 
 const Stack = createNativeStackNavigator();
@@ -11,7 +11,7 @@ const Stack = createNativeStackNavigator();
 const RootStack = () => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="SignInScreen" component={SignInScreen} />
+      <Stack.Screen name="SignInStack" component={SignInStack} />
       <Stack.Screen name="SignUpStack" component={SignUpStack} />
       <Stack.Screen name="FollowTopTab" component={FollowTopTab} />
     </Stack.Navigator>
