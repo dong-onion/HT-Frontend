@@ -1,3 +1,6 @@
+/* 허준서 1월 16일
+FollowingList에서 참조하는 팔로잉리스트 아이템입니다. */
+
 import React from 'react';
 import { StyleSheet, Image, View, Text } from 'react-native';
 import FollowButton from './FollowButton';

@@ -1,3 +1,6 @@
+/* 허준서 1월 16일
+팔로잉 리스트입니다. */
+
 import React from 'react';
 import { ScrollView } from 'react-native';
 import FollowingListItem from './FollowingListItem';

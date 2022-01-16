@@ -1,8 +1,10 @@
+/* 허준서 1월 16일
+FollowerList.js 에서 참조하는 팔로워리스트 아이템입니다. */
 import React from 'react';
 import { StyleSheet, Image, View, Text } from 'react-native';
 import FollowButton from './FollowButton';
 
-const FollowingListItem = ({ user }) => {
+const FollowerListItem = ({ user }) => {
   return (
     <View style={styles.block}>
       <View style={styles.profileBlock}>
@@ -48,4 +50,4 @@ const styles = StyleSheet.create({
   button: { marginRight: 20 },
 });
 
-export default FollowingListItem;
+export default FollowerListItem;
