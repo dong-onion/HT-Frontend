@@ -25,7 +25,11 @@ const SignInScreen = ({ navigation }) => {
         />
       </View>
       <View style={styles.check}>
-        <MaterialButton marginB={true} children={'로그인'} />
+        <MaterialButton
+          marginB={true}
+          children={'로그인'}
+          onPress={() => navigation.navigate('Profile')}
+        />
         <MaterialButton
           children={'회원가입'}
           onPress={() => navigation.navigate('SignUpStack')}
