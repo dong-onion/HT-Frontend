@@ -49,7 +49,6 @@ const ProfileImage = ({ navigation }) => {
           />
         )}
       </Pressable>
-      <Button title="Profile" onPress={() => navigation.navigate('Profile')} />
     </>
   );
 };
