@@ -1,11 +1,11 @@
 /* 허준서 1월 16일
-팔로잉 리스트입니다. */
+팔로워 리스트입니다. */
 
 import React from 'react';
 import { ScrollView } from 'react-native';
-import FollowingListItem from './FollowingListItem';
+import FollowerListItem from './FollowerListItem';
 
-const FollowingList = () => {
+const FollowerList = () => {
   const userList = [
     {
       id: 'lwamuhaji1',
@@ -66,10 +66,10 @@ const FollowingList = () => {
   return (
     <ScrollView>
       {userList.map((user) => (
-        <FollowingListItem user={user} key={user.id} />
+        <FollowerListItem user={user} key={user.id} />
       ))}
     </ScrollView>
   );
 };
 
-export default FollowingList;
+export default FollowerList;

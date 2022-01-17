@@ -1,4 +1,4 @@
-/* 1월 13일 허준서 */
+/* 모든 화면들의 루트 스택입니다. */
 
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
