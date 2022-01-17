@@ -7,6 +7,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import SignUpScreen1 from './SignUpScreen1';
 import SignUpScreen2 from './SignUpScreen2';
 import { SignUpContextProvider } from '../components/SignUpContext';
+import ProfileImage from '../components/ProfileImage';
 
 const Stack = createNativeStackNavigator();
 
@@ -24,6 +25,7 @@ const SignUpStack = () => {
           component={SignUpScreen2}
           options={{ title: '회원가입' }}
         />
+        <Stack.Screen name="ProfileImg" component={ProfileImage} />
       </Stack.Navigator>
     </SignUpContextProvider>
   );
