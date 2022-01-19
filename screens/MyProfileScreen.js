@@ -1,11 +1,18 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Alert,
+  Image,
+} from 'react-native';
 import ProfileList from '../components/ProfileList';
-import { SignUpContext } from '../components/SignUpContext';
 
 const MyProfileScreen = () => {
   const [activate, setActivate] = useState(true);
   const [text, setText] = useState('공개');
+  const [isFollow, setIsFollow] = useState(false);
   useEffect(() => {}, [text]);
   // const [newData, setNewData] = useState({
   //   age: age,
@@ -16,7 +23,33 @@ const MyProfileScreen = () => {
   // const onPress = () => {
   //   updateSignUpInfo(newData);
   // };
-
+  const followOnpress = () => {
+    isFollow
+      ? Alert.alert(
+          '팔로우를 취소 하시겠습니까?',
+          '확인을 누르시면 팔로우 취소를 합니다',
+          [
+            { text: '취소' },
+            {
+              text: '확인',
+              onPress: () => {
+                setIsFollow(!isFollow);
+                /*팔로잉 여부 전송*/
+              },
+            },
+          ]
+        )
+      : Alert.alert('팔로우 하시겠습니까?', '확인을 누르시면 팔로우 합니다', [
+          { text: '취소' },
+          {
+            text: '확인',
+            onPress: () => {
+              setIsFollow(!isFollow);
+              /*팔로잉 여부 전송*/
+            },
+          },
+        ]);
+  };
   const onActivate = () => {
     activate
       ? Alert.alert(
@@ -53,7 +86,17 @@ const MyProfileScreen = () => {
   return (
     <View style={styles.body}>
       <View style={styles.imgBox}>
-        <Text>이미지</Text>
+        <Image style={styles.profile} source={require('../assets/user.png')} />
+      </View>
+      <View style={styles.FollowBox}>
+        <TouchableOpacity
+          style={[styles.Btn, isFollow && styles.following]}
+          onPress={followOnpress}
+        >
+          <Text style={styles.textBtn}>
+            {isFollow ? '팔로잉' : '팔로우 신청'}
+          </Text>
+        </TouchableOpacity>
       </View>
       <ProfileList
         label="닉네임 : "
@@ -115,6 +158,28 @@ const styles = StyleSheet.create({
   imgBox: {
     flex: 1.4,
     backgroundColor: 'white',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 10,
+  },
+  profile: {
+    borderRadius: 50,
+    height: 100,
+    width: 100,
+    borderWidth: 1,
+    borderColor: '#aaaaaa',
+    backgroundColor: '#cccccc',
+    justifyContent: 'flex-end',
+    alignItems: 'flex-end',
+  },
+  FollowBox: {
+    flex: 0.9,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 10,
+  },
+  following: {
+    backgroundColor: '#64b5f6',
   },
   inputBox: {
     paddingHorizontal: 5,
@@ -148,7 +213,6 @@ const styles = StyleSheet.create({
   },
   BtnBox: {
     flex: 1.9,
-
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     alignItems: 'center',

@@ -13,8 +13,16 @@ const SignInStack = () => {
         options={{ headerShown: false }}
         component={SignInScreen}
       />
-      <Stack.Screen name="Profile" component={ProfileScreen} />
-      <Stack.Screen name="MyProfile" component={MyProfileScreen} />
+      <Stack.Screen
+        name="Profile"
+        component={ProfileScreen}
+        options={{ title: '프로필' }}
+      />
+      <Stack.Screen
+        name="MyProfile"
+        component={MyProfileScreen}
+        options={{ title: '내 프로필' }}
+      />
     </Stack.Navigator>
   );
 };

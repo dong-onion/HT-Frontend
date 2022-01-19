@@ -1,12 +1,11 @@
 import React, { useContext } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { SignUpContext } from '../components/SignUpContext';
+import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 
 const ProfileScreen = ({ navigation }) => {
   return (
     <View style={styles.body}>
       <View style={styles.imgBox}>
-        <Text>이미지</Text>
+        <Image style={styles.profile} source={require('../assets/user.png')} />
       </View>
       <View style={styles.inputBox}>
         <Text style={styles.textInput}>닉네임 : </Text>
@@ -44,6 +43,18 @@ const styles = StyleSheet.create({
   imgBox: {
     flex: 1.4,
     backgroundColor: 'white',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  profile: {
+    borderRadius: 50,
+    height: 100,
+    width: 100,
+    borderWidth: 1,
+    borderColor: '#aaaaaa',
+    backgroundColor: '#cccccc',
+    justifyContent: 'flex-end',
+    alignItems: 'flex-end',
   },
   inputBox: {
     paddingHorizontal: 30,
