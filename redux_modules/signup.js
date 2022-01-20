@@ -37,28 +37,30 @@ const signup = (state = initialState, action) => {
     case SET_PASSWORD:
       return {
         ...state,
-        email: action.password,
+        password: action.password,
       };
     case SET_NAME:
       return {
         ...state,
-        email: action.name,
+        name: action.name,
       };
     case SET_GENDER:
       return {
         ...state,
-        email: action.gender,
+        gender: action.gender,
       };
     case SET_WEIGHT:
       return {
         ...state,
-        email: action.weight,
+        weight: action.weight,
       };
     case SET_HEIGHT:
       return {
         ...state,
-        email: action.height,
+        height: action.height,
       };
+    default:
+      return state;
   }
 };
 
