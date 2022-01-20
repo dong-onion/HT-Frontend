@@ -1,66 +1,58 @@
 /* 1월 7일 허준서
-회원가입 첫번쨰 화면입니다.
-react-native-keyboard-aware-scroll-view 라이브러리가 사용되었습니다. */
+회원가입 첫번쨰 화면입니다. */
 
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import MaterialInput from '../components/MaterialInput';
 import { StyleSheet } from 'react-native';
 import MaterialButton from '../components/MaterialButton';
 import { useNavigation } from '@react-navigation/native';
-import { SignUpContext } from '../components/SignUpContext';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { useSelector, useDispatch } from 'react-redux';
+import { setEmail, setPassword } from '../redux_modules/signup';
 
 const SignUpScreen = () => {
   const navigation = useNavigation();
-  const { signUpInfo, setContextId, setContextPassword } =
-    useContext(SignUpContext);
+  const [localEmail, setLocalId] = useState('');
+  const [localPassword, setLocalPassword] = useState('');
+  const [localPasswordRetype, setLocalPasswordRetype] = useState('');
 
-  const [id, setId] = useState('');
-  const [password, setPassword] = useState('');
-  const [passwordRetype, setPasswordRetype] = useState('');
+  const dispatch = useDispatch();
+  const signupState = useSelector((state) => state.signup);
 
   const onPress = () => {
-    console.log(signUpInfo);
-
-    setContextId(id);
-    setContextPassword(password);
-
+    dispatch(setEmail(localEmail));
+    dispatch(setPassword(localPassword));
+    console.log(signupState);
     navigation.navigate('SignUpScreen-Second');
   };
-
-  const checkId = (cid) => {};
-
-  const checkPassword = (cpw) => {};
-
-  const checkPasswordRetype = (cpwr) => {};
 
   return (
     <KeyboardAwareScrollView contentContainerStyle={styles.block}>
       <MaterialInput
-        label="ID"
-        placeholder="아이디를 입력해주세요."
-        caption="중복된 아이디입니다."
-        value={id}
+        label="E-Mail"
+        placeholder="이메일을 입력해주세요."
+        caption="이미 가입되어 있는 이메일입니다."
+        value={localEmail}
         onChangeText={(text) => {
-          setId(text);
+          setLocalId(text);
         }}
       />
       <MaterialInput
         label="Password"
         placeholder="비밀번호를 입력해주세요."
         caption="유효하지 않은 비밀번호입니다."
-        value={password}
+        value={localPassword}
         onChangeText={(text) => {
-          setPassword(text);
+          setLocalPassword(text);
         }}
       />
       <MaterialInput
         label="Re-type Password"
         placeholder="비밀번호 확인"
         caption="비밀번호가 일치하지 않습니다."
-        value={passwordRetype}
+        value={localPasswordRetype}
         onChangeText={(text) => {
-          setPasswordRetype(text);
+          setLocalPasswordRetype(text);
         }}
       />
       <MaterialButton onPress={onPress}>다음으로</MaterialButton>
