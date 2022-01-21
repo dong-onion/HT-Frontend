@@ -1,6 +1,6 @@
 import React from 'react';
-import {View, Text, StyleSheet, TouchableOpacity, Alert} from 'react-native';
-import {useDispatch, useSelector} from 'react-redux';
+import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 import ProfileList from '../components/ProfileList';
 import {
   setActivateAciton,
@@ -9,10 +9,11 @@ import {
   SetNicknameAction,
   setWeightAciton,
 } from '../redux_modules/profile/profile.action';
-import {selectProfile} from '../redux_modules/profile/profile.reducer';
+import { selectProfile } from '../redux_modules/profile/profile.reducer';
 
 const MyProfileScreen = () => {
-  const {nickname, age, height, weight, activate} = useSelector(selectProfile);
+  const { nickname, age, height, weight, activate } =
+    useSelector(selectProfile);
   const dispatch = useDispatch();
 
   const onActivate = () => {
@@ -21,7 +22,7 @@ const MyProfileScreen = () => {
           '프로필을 비공개로 바꾸시겠습니까?',
           '확인을 누르시면 비공개로 바뀌어집니다.',
           [
-            {text: '취소'},
+            { text: '취소' },
             {
               text: '확인',
               onPress: () => {
@@ -35,7 +36,7 @@ const MyProfileScreen = () => {
           '프로필을 공개로 바꾸시겠습니까?',
           '확인을 누르시면 공개로 바뀌어집니다.',
           [
-            {text: '취소'},
+            { text: '취소' },
             {
               text: '확인',
               onPress: () => {

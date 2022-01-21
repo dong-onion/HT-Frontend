@@ -9,12 +9,12 @@ const SET_WEIGHT = 'signup/SET_WEIGHT';
 const SET_HEIGHT = 'signup/SET_HEIGHT';
 
 // 액션 생성 함수
-export const setEmail = email => ({type: SET_EMAIL, email});
-export const setPassword = password => ({type: SET_PASSWORD, password});
-export const setNAME = name => ({type: SET_NAME, name});
-export const setGender = gender => ({type: SET_GENDER, gender});
-export const setWeight = weight => ({type: SET_WEIGHT, weight});
-export const setHeight = height => ({type: SET_HEIGHT, height});
+export const setEmail = email => ({ type: SET_EMAIL, email });
+export const setPassword = password => ({ type: SET_PASSWORD, password });
+export const setNAME = name => ({ type: SET_NAME, name });
+export const setGender = gender => ({ type: SET_GENDER, gender });
+export const setWeight = weight => ({ type: SET_WEIGHT, weight });
+export const setHeight = height => ({ type: SET_HEIGHT, height });
 
 // 초기 상태
 const initialState = {

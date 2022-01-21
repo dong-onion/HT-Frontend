@@ -1,71 +1,128 @@
 /* 1월 7일 허준서
 회원가입 첫번쨰 화면입니다. */
 
-import React, { useState } from 'react';
-import MaterialInput from '../components/MaterialInput';
-import { StyleSheet } from 'react-native';
+import React, { useRef, useState } from 'react';
+import { StyleSheet, View } from 'react-native';
 import MaterialButton from '../components/MaterialButton';
 import { useNavigation } from '@react-navigation/native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { useSelector, useDispatch } from 'react-redux';
 import { setEmail, setPassword } from '../redux_modules/signup';
+import { TextField, FilledTextField } from 'rn-material-ui-textfield';
 
 const SignUpScreen = () => {
   const navigation = useNavigation();
-  const [localEmail, setLocalId] = useState('');
+  const [localEmail, setLocalEmail] = useState('');
   const [localPassword, setLocalPassword] = useState('');
   const [localPasswordRetype, setLocalPasswordRetype] = useState('');
+  const [error, setError] = useState('');
+
+  const emailField = useRef();
+  const passwordField = useRef();
+  const passwordRetype = useRef();
 
   const dispatch = useDispatch();
   const signupState = useSelector((state) => state.signup);
 
   const onPress = () => {
-    dispatch(setEmail(localEmail));
-    dispatch(setPassword(localPassword));
-    console.log(signupState);
-    navigation.navigate('SignUpScreen-Second');
+    if (localPassword === localPasswordRetype) {
+      setError('');
+
+      dispatch(setEmail(localEmail));
+      dispatch(setPassword(localPassword));
+      console.log(signupState);
+      navigation.navigate('SignUpScreen-Second');
+    } else {
+      setError('비밀번호가 일치하지 않습니다.');
+    }
+  };
+
+  const onSubmitEmail = () => {
+    passwordField.current.focus();
+  };
+
+  const onSubmitPassword = () => {
+    passwordRetype.current.focus();
+  };
+
+  const onChangeEmail = (text) => {
+    setLocalEmail(text);
+  };
+
+  const onChangePassword = (text) => {
+    setLocalPassword(text);
+  };
+
+  const onChangePasswordRetype = (text) => {
+    setLocalPasswordRetype(text);
   };
 
   return (
-    <KeyboardAwareScrollView contentContainerStyle={styles.block}>
-      <MaterialInput
-        label="E-Mail"
-        placeholder="이메일을 입력해주세요."
-        caption="이미 가입되어 있는 이메일입니다."
-        value={localEmail}
-        onChangeText={(text) => {
-          setLocalId(text);
-        }}
-      />
-      <MaterialInput
-        label="Password"
-        placeholder="비밀번호를 입력해주세요."
-        caption="유효하지 않은 비밀번호입니다."
-        value={localPassword}
-        onChangeText={(text) => {
-          setLocalPassword(text);
-        }}
-      />
-      <MaterialInput
-        label="Re-type Password"
-        placeholder="비밀번호 확인"
-        caption="비밀번호가 일치하지 않습니다."
-        value={localPasswordRetype}
-        onChangeText={(text) => {
-          setLocalPasswordRetype(text);
-        }}
-      />
-      <MaterialButton onPress={onPress}>다음으로</MaterialButton>
+    <KeyboardAwareScrollView contentContainerStyle={styles.container}>
+      <View style={styles.input}>
+        <FilledTextField
+          ref={emailField}
+          keyboardType="email-address"
+          autoCapitalize="none"
+          autoCorrect={false}
+          enablesReturnKeyAutomatically={true}
+          returnKeyType="next"
+          label="Email Address"
+          onSubmitEditing={onSubmitEmail}
+          onChangeText={onChangeEmail}
+        />
+      </View>
+      <View style={styles.input}>
+        <TextField
+          ref={passwordField}
+          secureTextEntry={true}
+          autoCapitalize="none"
+          autoCorrect={false}
+          enablesReturnKeyAutomatically={true}
+          clearTextOnFocus={true}
+          returnKeyType="next"
+          label="Password"
+          title=""
+          maxLength={20}
+          characterRestriction={20}
+          onSubmitEditing={onSubmitPassword}
+          onChangeText={onChangePassword}
+        />
+      </View>
+      <View style={styles.input}>
+        <TextField
+          ref={passwordRetype}
+          secureTextEntry={true}
+          autoCapitalize="none"
+          autoCorrect={false}
+          enablesReturnKeyAutomatically={true}
+          clearTextOnFocus={true}
+          returnKeyType="done"
+          label="Re-type password"
+          title=""
+          maxLength={20}
+          characterRestriction={20}
+          onChangeText={onChangePasswordRetype}
+          error={error}
+        />
+      </View>
+      <MaterialButton style={styles.button} onPress={onPress}>
+        다음으로
+      </MaterialButton>
     </KeyboardAwareScrollView>
   );
 };
 
 const styles = StyleSheet.create({
-  block: {
+  container: {
+    padding: 10,
     height: 600,
-    justifyContent: 'space-around',
-    alignItems: 'center',
   },
+  button: {
+    marginTop: 'auto',
+    alignSelf: 'center',
+  },
+  input: { marginTop: 10 },
 });
 
 export default SignUpScreen;

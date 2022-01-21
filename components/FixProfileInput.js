@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   TextInput,
   View,
@@ -7,7 +7,7 @@ import {
   Text,
 } from 'react-native';
 
-const FixProfileInput = ({onFix}) => {
+const FixProfileInput = ({ onFix }) => {
   const [text, setText] = useState('');
   return (
     <View style={styles.inputBox}>
