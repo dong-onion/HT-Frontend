@@ -1,39 +1,29 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import FixProfileInput from './FixProfileInput';
 
-const ProfileList = ({ label, data, text }) => {
+const ProfileList = ({label, text, onModify}) => {
   const [onFix, setOnFix] = useState(false);
-  const [changed, setChanged] = useState(false);
-  const [newText, setNewText] = useState(text);
   const textInputFix = () => {
     setOnFix(true);
   };
 
-  const isFix = () => {
-    setOnFix(!onFix);
-    setChanged(true);
-  };
-  useEffect(() => {}, [data]);
   return (
     <View style={styles.inputBox}>
       {onFix ? (
         <>
           <Text style={styles.text}>{label}</Text>
           <FixProfileInput
-            isFix={isFix}
-            // data={data}
-            // value={setNewText}
+            onFix={newText => {
+              setOnFix(false);
+              onModify(newText);
+            }}
           />
         </>
       ) : (
         <>
           <Text style={styles.text}>{label}</Text>
-          {changed ? (
-            <Text style={styles.text2}>{/*newText*/}</Text>
-          ) : (
-            <Text style={styles.text2}>{/*text*/}</Text>
-          )}
+          <Text style={styles.text2}>{text}</Text>
 
           {/* age, nickName */}
           <TouchableOpacity style={styles.fixOpa} onPress={textInputFix}>

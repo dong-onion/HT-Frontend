@@ -2,15 +2,14 @@
 회원가입 화면에서 사용하려고 만든 버튼입니다. */
 
 import React from 'react';
-import { StyleSheet, Text, Pressable } from 'react-native';
+import {StyleSheet, Text, Pressable} from 'react-native';
 
-const MaterialButton = ({ children, onPress, marginB }) => {
+const MaterialButton = ({children, onPress, marginB}) => {
   return (
     <Pressable
       style={[styles.block, marginB && styles.marginB]}
-      android_ripple={{ color: 'gray' }}
-      onPress={onPress}
-    >
+      android_ripple={{color: 'gray'}}
+      onPress={onPress}>
       <Text>{children}</Text>
     </Pressable>
   );

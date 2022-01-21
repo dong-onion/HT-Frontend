@@ -1,8 +1,7 @@
-import React, { useContext } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { SignUpContext } from '../components/SignUpContext';
+import React, {useContext} from 'react';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 
-const ProfileScreen = ({ navigation }) => {
+const ProfileScreen = ({navigation}) => {
   return (
     <View style={styles.body}>
       <View style={styles.imgBox}>
@@ -27,8 +26,7 @@ const ProfileScreen = ({ navigation }) => {
       <View style={styles.BtnBox}>
         <TouchableOpacity
           style={styles.Btn}
-          onPress={() => navigation.navigate('MyProfile')}
-        >
+          onPress={() => navigation.navigate('MyProfile')}>
           <Text style={styles.textBtn}>확인</Text>
         </TouchableOpacity>
       </View>

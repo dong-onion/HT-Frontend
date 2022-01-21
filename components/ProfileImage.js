@@ -3,7 +3,7 @@
 react-native-vector-icons,
 react-native-image-picker 라이브러리가 사용되었습니다. */
 
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {
   Image,
   Platform,
@@ -13,9 +13,9 @@ import {
   Button,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { launchImageLibrary } from 'react-native-image-picker';
+import {launchImageLibrary} from 'react-native-image-picker';
 
-const ProfileImage = ({ navigation }) => {
+const ProfileImage = ({navigation}) => {
   const [response, setResponse] = useState(null);
   console.log('res : ', response);
   const onPress = () => {
@@ -26,12 +26,12 @@ const ProfileImage = ({ navigation }) => {
         maxHeight: 512,
         includeBase64: Platform.OS === 'android',
       },
-      (res) => {
+      res => {
         if (res.didCancel) {
           return;
         }
         setResponse(res);
-      }
+      },
     );
   };
 
@@ -45,7 +45,7 @@ const ProfileImage = ({ navigation }) => {
         ) : (
           <Image
             style={styles.block}
-            source={{ uri: response?.assets[0]?.uri }}
+            source={{uri: response?.assets[0]?.uri}}
           />
         )}
       </Pressable>
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     alignItems: 'flex-end',
   },
-  icon: { padding: 0 },
+  icon: {padding: 0},
 });
 
 export default ProfileImage;

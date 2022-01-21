@@ -1,21 +1,19 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
+import React from 'react';
+import {View, Text, StyleSheet, TouchableOpacity, Alert} from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
 import ProfileList from '../components/ProfileList';
-import { SignUpContext } from '../components/SignUpContext';
+import {
+  setActivateAciton,
+  setAgeAction,
+  setHeightAciton,
+  SetNicknameAction,
+  setWeightAciton,
+} from '../redux_modules/profile/profile.action';
+import {selectProfile} from '../redux_modules/profile/profile.reducer';
 
 const MyProfileScreen = () => {
-  const [activate, setActivate] = useState(true);
-  const [text, setText] = useState('공개');
-  useEffect(() => {}, [text]);
-  // const [newData, setNewData] = useState({
-  //   age: age,
-  //   height: height,
-  //   nickName: nickName,
-  //   weight: weight,
-  // });
-  // const onPress = () => {
-  //   updateSignUpInfo(newData);
-  // };
+  const {nickname, age, height, weight, activate} = useSelector(selectProfile);
+  const dispatch = useDispatch();
 
   const onActivate = () => {
     activate
@@ -23,31 +21,30 @@ const MyProfileScreen = () => {
           '프로필을 비공개로 바꾸시겠습니까?',
           '확인을 누르시면 비공개로 바뀌어집니다.',
           [
-            { text: '취소' },
+            {text: '취소'},
             {
               text: '확인',
               onPress: () => {
-                setActivate(!activate);
+                dispatch(setActivateAciton(!activate));
                 /*프로필 공개여부 DB 전송*/
               },
             },
-          ]
+          ],
         )
       : Alert.alert(
           '프로필을 공개로 바꾸시겠습니까?',
           '확인을 누르시면 공개로 바뀌어집니다.',
           [
-            { text: '취소' },
+            {text: '취소'},
             {
               text: '확인',
               onPress: () => {
-                setActivate(!activate);
+                dispatch(setActivateAciton(!activate));
                 /*프로필 공개여부 DB 전송*/
               },
             },
-          ]
+          ],
         );
-    setText(activate ? '공개' : '비공개');
   };
 
   return (
@@ -57,50 +54,38 @@ const MyProfileScreen = () => {
       </View>
       <ProfileList
         label="닉네임 : "
-        // data={(val) =>
-        //   setNewData({
-        //     ...newData,
-        //     nickName: val,
-        //   })
-        // }
-        // text={nickName}
+        text={nickname}
+        onModify={text => {
+          dispatch(SetNicknameAction(text));
+        }}
       />
       <ProfileList
         label="나이 : "
-        // data={(val) =>
-        //   setNewData({
-        //     ...newData,
-        //     age: val,
-        //   })
-        // }
-        // text={age}
+        text={age}
+        onModify={text => {
+          dispatch(setAgeAction(text));
+        }}
       />
       <ProfileList
         label="체중 : "
-        // data={(val) =>
-        //   setNewData({
-        //     ...newData,
-        //     weight: val,
-        //   })
-        // }
-        // text={weight}
+        text={weight}
+        onModify={text => {
+          dispatch(setWeightAciton(text));
+        }}
       />
       <ProfileList
         label="신장 : "
-        // data={(val) =>
-        //   setNewData({
-        //     ...newData,
-        //     height: val,
-        //   })
-        // }
-        // text={height}
+        text={height}
+        onModify={text => {
+          dispatch(setHeightAciton(text));
+        }}
       />
       <View style={styles.BtnBox}>
         <TouchableOpacity style={styles.Btn}>
           <Text style={styles.textBtn}>확인</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.Btn} onPress={onActivate}>
-          <Text style={styles.textBtn}>{text}</Text>
+          <Text style={styles.textBtn}>{activate ? '공개' : '비공개'}</Text>
         </TouchableOpacity>
       </View>
     </View>
