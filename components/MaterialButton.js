@@ -4,13 +4,12 @@
 import React from 'react';
 import { StyleSheet, Text, Pressable } from 'react-native';
 
-const MaterialButton = ({ children, onPress, marginB }) => {
+const MaterialButton = ({ children, onPress, marginB, style }) => {
   return (
     <Pressable
-      style={[styles.block, marginB && styles.marginB]}
+      style={[styles.block, marginB && styles.marginB, style]}
       android_ripple={{ color: 'gray' }}
-      onPress={onPress}
-    >
+      onPress={onPress}>
       <Text>{children}</Text>
     </Pressable>
   );

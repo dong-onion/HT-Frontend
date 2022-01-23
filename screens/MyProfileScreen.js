@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -7,22 +7,22 @@ import {
   Alert,
   Image,
 } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 import ProfileList from '../components/ProfileList';
+import {
+  setActivateAciton,
+  setAgeAction,
+  setHeightAciton,
+  SetNicknameAction,
+  setWeightAciton,
+} from '../redux_modules/profile/profile.action';
+import { selectProfile } from '../redux_modules/profile/profile.reducer';
 
 const MyProfileScreen = () => {
-  const [activate, setActivate] = useState(true);
-  const [text, setText] = useState('공개');
+  const { nickname, age, height, weight, activate } =
+    useSelector(selectProfile);
+  const dispatch = useDispatch();
   const [isFollow, setIsFollow] = useState(false);
-  useEffect(() => {}, [text]);
-  // const [newData, setNewData] = useState({
-  //   age: age,
-  //   height: height,
-  //   nickName: nickName,
-  //   weight: weight,
-  // });
-  // const onPress = () => {
-  //   updateSignUpInfo(newData);
-  // };
   const followOnpress = () => {
     isFollow
       ? Alert.alert(
@@ -37,7 +37,7 @@ const MyProfileScreen = () => {
                 /*팔로잉 여부 전송*/
               },
             },
-          ]
+          ],
         )
       : Alert.alert('팔로우 하시겠습니까?', '확인을 누르시면 팔로우 합니다', [
           { text: '취소' },
@@ -50,6 +50,7 @@ const MyProfileScreen = () => {
           },
         ]);
   };
+
   const onActivate = () => {
     activate
       ? Alert.alert(
@@ -60,11 +61,11 @@ const MyProfileScreen = () => {
             {
               text: '확인',
               onPress: () => {
-                setActivate(!activate);
+                dispatch(setActivateAciton(!activate));
                 /*프로필 공개여부 DB 전송*/
               },
             },
-          ]
+          ],
         )
       : Alert.alert(
           '프로필을 공개로 바꾸시겠습니까?',
@@ -74,13 +75,12 @@ const MyProfileScreen = () => {
             {
               text: '확인',
               onPress: () => {
-                setActivate(!activate);
+                dispatch(setActivateAciton(!activate));
                 /*프로필 공개여부 DB 전송*/
               },
             },
-          ]
+          ],
         );
-    setText(activate ? '공개' : '비공개');
   };
 
   return (
@@ -91,8 +91,7 @@ const MyProfileScreen = () => {
       <View style={styles.FollowBox}>
         <TouchableOpacity
           style={[styles.Btn, isFollow && styles.following]}
-          onPress={followOnpress}
-        >
+          onPress={followOnpress}>
           <Text style={styles.textBtn}>
             {isFollow ? '팔로잉' : '팔로우 신청'}
           </Text>
@@ -100,50 +99,38 @@ const MyProfileScreen = () => {
       </View>
       <ProfileList
         label="닉네임 : "
-        // data={(val) =>
-        //   setNewData({
-        //     ...newData,
-        //     nickName: val,
-        //   })
-        // }
-        // text={nickName}
+        text={nickname}
+        onModify={text => {
+          dispatch(SetNicknameAction(text));
+        }}
       />
       <ProfileList
         label="나이 : "
-        // data={(val) =>
-        //   setNewData({
-        //     ...newData,
-        //     age: val,
-        //   })
-        // }
-        // text={age}
+        text={age}
+        onModify={text => {
+          dispatch(setAgeAction(text));
+        }}
       />
       <ProfileList
         label="체중 : "
-        // data={(val) =>
-        //   setNewData({
-        //     ...newData,
-        //     weight: val,
-        //   })
-        // }
-        // text={weight}
+        text={weight}
+        onModify={text => {
+          dispatch(setWeightAciton(text));
+        }}
       />
       <ProfileList
         label="신장 : "
-        // data={(val) =>
-        //   setNewData({
-        //     ...newData,
-        //     height: val,
-        //   })
-        // }
-        // text={height}
+        text={height}
+        onModify={text => {
+          dispatch(setHeightAciton(text));
+        }}
       />
       <View style={styles.BtnBox}>
         <TouchableOpacity style={styles.Btn}>
           <Text style={styles.textBtn}>확인</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.Btn} onPress={onActivate}>
-          <Text style={styles.textBtn}>{text}</Text>
+          <Text style={styles.textBtn}>{activate ? '공개' : '비공개'}</Text>
         </TouchableOpacity>
       </View>
     </View>

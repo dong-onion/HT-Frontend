@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 
 const ProfileScreen = ({ navigation }) => {
@@ -26,8 +26,7 @@ const ProfileScreen = ({ navigation }) => {
       <View style={styles.BtnBox}>
         <TouchableOpacity
           style={styles.Btn}
-          onPress={() => navigation.navigate('MyProfile')}
-        >
+          onPress={() => navigation.navigate('MyProfile')}>
           <Text style={styles.textBtn}>확인</Text>
         </TouchableOpacity>
       </View>
