@@ -4,6 +4,7 @@ import { createReducer } from '@reduxjs/toolkit';
 import {
   setActivateAciton,
   setAgeAction,
+  setFollowAction,
   setHeightAciton,
   SetNicknameAction,
   setWeightAciton,
@@ -38,6 +39,10 @@ const reducer = createReducer(initialState, {
   [setActivateAciton.type]: (state, action) => {
     const { activate } = action.payload;
     state.activate = activate;
+  },
+  [setFollowAction.type]: (state, action) => {
+    const { follow } = action.payload;
+    state.follow = follow;
   },
 });
 

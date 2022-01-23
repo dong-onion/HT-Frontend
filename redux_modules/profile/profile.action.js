@@ -12,12 +12,19 @@ export const SetNicknameAction = createAction(
 export const setAgeAction = createAction('profile/setAgeAction', age => {
   return { payload: { age } };
 });
+
 export const setWeightAciton = createAction('profile/setWeight', weight => {
   return { payload: { weight } };
 });
+
 export const setHeightAciton = createAction('profile/setHeight', height => {
   return { payload: { height } };
 });
+
+export const setFollowAction = createAction('profile/setFollow', follow => {
+  return { payload: { follow } };
+});
+
 export const setActivateAciton = createAction(
   'profile/setActivate',
   activate => {

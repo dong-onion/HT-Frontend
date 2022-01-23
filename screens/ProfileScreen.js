@@ -1,11 +1,59 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Image,
+  Alert,
+} from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
+import { setFollowAction } from '../redux_modules/profile/profile.action';
+import { selectProfile } from '../redux_modules/profile/profile.reducer';
 
 const ProfileScreen = ({ navigation }) => {
+  const { follow } = useSelector(selectProfile);
+  const dispatch = useDispatch();
+  const followOnpress = () => {
+    follow
+      ? Alert.alert(
+          '팔로우를 취소 하시겠습니까?',
+          '확인을 누르시면 팔로우 취소를 합니다',
+          [
+            { text: '취소' },
+            {
+              text: '확인',
+              onPress: () => {
+                dispatch(setFollowAction(!follow));
+                /*팔로잉 여부 전송*/
+              },
+            },
+          ],
+        )
+      : Alert.alert('팔로우 하시겠습니까?', '확인을 누르시면 팔로우 합니다', [
+          { text: '취소' },
+          {
+            text: '확인',
+            onPress: () => {
+              dispatch(setFollowAction(!follow));
+              /*팔로잉 여부 전송*/
+            },
+          },
+        ]);
+  };
   return (
     <View style={styles.body}>
       <View style={styles.imgBox}>
         <Image style={styles.profile} source={require('../assets/user.png')} />
+      </View>
+      <View style={styles.FollowBox}>
+        <TouchableOpacity
+          style={[styles.Btn, follow && styles.following]}
+          onPress={followOnpress}>
+          <Text style={styles.textBtn}>
+            {follow ? '팔로잉' : '팔로우 신청'}
+          </Text>
+        </TouchableOpacity>
       </View>
       <View style={styles.inputBox}>
         <Text style={styles.textInput}>닉네임 : </Text>
@@ -54,6 +102,15 @@ const styles = StyleSheet.create({
     backgroundColor: '#cccccc',
     justifyContent: 'flex-end',
     alignItems: 'flex-end',
+  },
+  FollowBox: {
+    flex: 0.9,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 10,
+  },
+  following: {
+    backgroundColor: '#64b5f6',
   },
   inputBox: {
     paddingHorizontal: 30,
