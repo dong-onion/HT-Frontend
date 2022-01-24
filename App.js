@@ -3,10 +3,11 @@ import { NavigationContainer } from '@react-navigation/native';
 
 import RootStack from './screens/RootStack';
 import rootReducer from './redux_modules';
-import { createStore } from 'redux';
+import { applyMiddleware, createStore } from 'redux';
 import { Provider } from 'react-redux';
+import ReduxThunk from 'redux-thunk';
 
-const store = createStore(rootReducer);
+const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
 console.log(store.getState());
 
 const App = () => {
