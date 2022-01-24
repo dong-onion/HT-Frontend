@@ -1,12 +1,12 @@
 // 회원가입 상태 관리를 위한 리덕스 모듈입니다.
 
 // 액션 타입
-const SET_EMAIL = 'signup/SET_EMAIL';
-const SET_PASSWORD = 'signup/SET_PASSWORD';
-const SET_NAME = 'signup/SET_NAME';
-const SET_GENDER = 'signup/SET_GENDER';
-const SET_WEIGHT = 'signup/SET_WEIGHT';
-const SET_HEIGHT = 'signup/SET_HEIGHT';
+const SET_EMAIL = 'signUp/SET_EMAIL';
+const SET_PASSWORD = 'signUp/SET_PASSWORD';
+const SET_NAME = 'signUp/SET_NAME';
+const SET_GENDER = 'signUp/SET_GENDER';
+const SET_WEIGHT = 'signUp/SET_WEIGHT';
+const SET_HEIGHT = 'signUp/SET_HEIGHT';
 
 // 액션 생성 함수
 export const setEmail = (email) => ({ type: SET_EMAIL, email });
@@ -27,7 +27,7 @@ const initialState = {
 };
 
 // 리듀서
-const signup = (state = initialState, action) => {
+const reducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_EMAIL:
       return {
@@ -64,4 +64,4 @@ const signup = (state = initialState, action) => {
   }
 };
 
-export default signup;
+export default reducer;

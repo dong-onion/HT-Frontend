@@ -1,8 +1,8 @@
 // 루트 리듀서입니다.
 
 import { combineReducers } from 'redux';
-import signup from './signup';
+import signUpInfo from './signUp';
 
-const rootReducer = combineReducers({ signup });
+const rootReducer = combineReducers({ signUpInfo });
 
 export default rootReducer;
