@@ -10,7 +10,6 @@ import { launchImageLibrary } from 'react-native-image-picker';
 
 const ProfileImage = ({ style }) => {
   const [response, setResponse] = useState(null);
-  console.log('res : ', response);
   const onPress = () => {
     launchImageLibrary(
       {
@@ -23,6 +22,7 @@ const ProfileImage = ({ style }) => {
         if (res.didCancel) {
           return;
         }
+        console.log('res : ', res);
         setResponse(res);
       }
     );
