@@ -1,7 +1,5 @@
 /* 1월 7일 허준서
-프로필 이미지 컴포넌트입니다.
-react-native-vector-icons,
-react-native-image-picker 라이브러리가 사용되었습니다. */
+프로필 이미지 컴포넌트입니다. */
 
 import React, { useState } from 'react';
 import { Image, Platform, StyleSheet, Pressable, View } from 'react-native';
