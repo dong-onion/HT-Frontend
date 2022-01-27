@@ -15,7 +15,7 @@ const SignInScreen = ({ navigation }) => {
         email: id,
         password: pw,
       });
-      const token = response.data.token;
+      const token = response.data;
       if (token) {
         await AsyncStorage.setItem('token', token);
         // navigation.navigate('Profile');
