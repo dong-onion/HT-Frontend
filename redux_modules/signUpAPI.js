@@ -8,6 +8,7 @@ const SIGNUP_FAIL = 'SIGNUP_ERROR';
 // 회원가입 요청
 export const requestSignUp = (data) => async (dispatch, getState) => {
   dispatch({ type: SIGNUP });
+
   try {
     const response = await signUpAPI.requestSignUp(data);
     dispatch({ type: SIGNUP_SUCCESS, response });

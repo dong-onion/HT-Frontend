@@ -2,7 +2,6 @@
 FollowTopTab에서 참조하는 팔로워스크린입니다. */
 
 import React from 'react';
-import { View } from 'react-native';
 import FollowerList from '../components/FollowerList';
 
 const FollowerScreen = () => {

@@ -6,9 +6,9 @@ import rootReducer from './redux_modules';
 import { applyMiddleware, createStore } from 'redux';
 import { Provider } from 'react-redux';
 import ReduxThunk from 'redux-thunk';
+import logger from 'redux-logger';
 
 const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
-console.log(store.getState());
 
 const App = () => {
   return (
