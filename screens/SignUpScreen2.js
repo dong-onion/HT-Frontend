@@ -52,8 +52,7 @@ const SignUpScreen2 = () => {
           selectedValue={selectedLanguage}
           onValueChange={(itemValue, itemIndex) =>
             setSelectedLanguage(itemValue)
-          }
-        >
+          }>
           <Picker.Item label="남자" value="java" />
           <Picker.Item label="여자" value="js" />
         </Picker>

@@ -1,8 +1,8 @@
-import React, {useEffect, useState} from 'react';
-import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import FixProfileInput from './FixProfileInput';
 
-const ProfileList = ({label, text, onModify}) => {
+const ProfileList = ({ label, text, onModify }) => {
   const [onFix, setOnFix] = useState(false);
   const textInputFix = () => {
     setOnFix(true);
@@ -44,6 +44,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flex: 1,
     backgroundColor: 'white',
+    height: 80,
   },
   text: {
     color: 'black',

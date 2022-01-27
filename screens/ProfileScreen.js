@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   View,
   Text,
@@ -8,12 +8,19 @@ import {
   Alert,
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { setFollowAction } from '../redux_modules/profile/profile.action';
-import { selectProfile } from '../redux_modules/profile/profile.reducer';
+import {
+  getOtherProfile,
+  setFollowAction,
+} from '../redux_modules/profile/otherProfile.action';
+import { selectOtherProfile } from '../redux_modules/profile/otherProfile.reducer';
+setFollowAction;
 
 const ProfileScreen = ({ navigation }) => {
-  const { follow } = useSelector(selectProfile);
+  const { follow } = useSelector(selectOtherProfile);
   const dispatch = useDispatch();
+  useEffect(() => {
+    // dispatch(getOtherProfile(userID))
+  }, []);
   const followOnpress = () => {
     follow
       ? Alert.alert(

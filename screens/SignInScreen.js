@@ -7,7 +7,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const SignInScreen = ({ navigation }) => {
   const [id, setId] = useState('');
   const [pw, setPw] = useState('');
+
   const onLogin = async () => {
+    navigation.navigate('Profile');
     try {
       const response = await axios.post('http://localhost:8080/auth/login', {
         email: id,
@@ -16,7 +18,7 @@ const SignInScreen = ({ navigation }) => {
       const token = response.data.token;
       if (token) {
         await AsyncStorage.setItem('token', token);
-        navigation.navigate('Profile');
+        // navigation.navigate('Profile');
       } else {
         Alert('존재하지 않는 계정입니다');
       }
@@ -36,11 +38,12 @@ const SignInScreen = ({ navigation }) => {
         <Text style={styles.headerText}>운동</Text>
       </View>
       <View style={styles.logIn}>
-        <TextInput style={styles.input} placeholder="id" />
+        <TextInput style={styles.input} placeholder="id" onChangeText={setId} />
         <TextInput
           style={styles.input}
           secureTextEntry={true}
           placeholder="pw"
+          onChangeText={setPw}
         />
       </View>
       <View style={styles.check}>

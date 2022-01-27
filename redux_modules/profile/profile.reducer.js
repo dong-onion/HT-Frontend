@@ -8,6 +8,7 @@ import {
   setHeightAciton,
   SetNicknameAction,
   setWeightAciton,
+  getMyProfile,
 } from './profile.action';
 
 const initialState = {
@@ -16,6 +17,9 @@ const initialState = {
   weight: '',
   height: '',
   activate: false,
+  loading: false,
+  data: null,
+  error: null,
 };
 
 const reducer = createReducer(initialState, {
@@ -43,6 +47,23 @@ const reducer = createReducer(initialState, {
   [setFollowAction.type]: (state, action) => {
     const { follow } = action.payload;
     state.follow = follow;
+  },
+  [getMyProfile.pending]: state => {
+    state = { ...state, loading: true, data: null, error: null };
+  },
+  [getMyProfile.fulfilled]: (state, action) => {
+    const { nickname, age, height, weight, activate } = action.payload;
+    state.nickname = nickname;
+    state.age = age;
+    state.height = height;
+    state.weight = weight;
+    state.activate = activate;
+    state.data = action.payload;
+    state.loading = false;
+  },
+  [getMyProfile.rejected]: (state, action) => {
+    state.error = action.error;
+    state.loading = false;
   },
 });
 

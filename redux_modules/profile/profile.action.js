@@ -1,6 +1,8 @@
 // profile 관리 액션 모듈입니다 react-redux toolkit 이 사용되었습니다
 
-import { createAction } from '@reduxjs/toolkit';
+import { createAction, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
+import makeRequest from '../../function/makeRequest';
 
 export const SetNicknameAction = createAction(
   'profile/setNicknameAciton',
@@ -29,5 +31,17 @@ export const setActivateAciton = createAction(
   'profile/setActivate',
   activate => {
     return { payload: { activate } };
+  },
+);
+export const getMyProfile = createAsyncThunk(
+  'myProfile/getMyProfile',
+  async () => {
+    try {
+      const res = makeRequest({ method: 'GET', url: '/users/profile/me' });
+      return res;
+    } catch (error) {
+      console.log(error);
+      return {};
+    }
   },
 );

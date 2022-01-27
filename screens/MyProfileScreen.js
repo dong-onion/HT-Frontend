@@ -1,4 +1,6 @@
-import React from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import axios from 'axios';
+import React, { useEffect } from 'react';
 import {
   View,
   Text,
@@ -15,13 +17,33 @@ import {
   setHeightAciton,
   SetNicknameAction,
   setWeightAciton,
+  getMyProfile,
 } from '../redux_modules/profile/profile.action';
 import { selectProfile } from '../redux_modules/profile/profile.reducer';
+import makeRequest from '../function/makeRequest';
 
-const MyProfileScreen = () => {
+const MyProfileScreen = ({ navigation }) => {
   const { nickname, age, height, weight, activate } =
     useSelector(selectProfile);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getMyProfile());
+  }, []);
+  const postMyProfile = async () => {
+    navigation.navigate('JsonScreen');
+    await makeRequest({
+      method: 'POST',
+      url: '/users/profile/me',
+      data: {
+        nickname,
+        age,
+        height,
+        weight,
+        activate,
+      },
+    });
+  };
 
   const onActivate = () => {
     activate
@@ -34,7 +56,6 @@ const MyProfileScreen = () => {
               text: '확인',
               onPress: () => {
                 dispatch(setActivateAciton(!activate));
-                /*프로필 공개여부 DB 전송*/
               },
             },
           ],
@@ -48,7 +69,6 @@ const MyProfileScreen = () => {
               text: '확인',
               onPress: () => {
                 dispatch(setActivateAciton(!activate));
-                /*프로필 공개여부 DB 전송*/
               },
             },
           ],
@@ -89,7 +109,7 @@ const MyProfileScreen = () => {
         }}
       />
       <View style={styles.BtnBox}>
-        <TouchableOpacity style={styles.Btn}>
+        <TouchableOpacity style={styles.Btn} onPress={postMyProfile}>
           <Text style={styles.textBtn}>확인</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.Btn} onPress={onActivate}>
