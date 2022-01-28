@@ -19,12 +19,12 @@ const ProfileImage = ({ style }) => {
         maxHeight: 512,
         includeBase64: Platform.OS === 'android',
       },
-      (res) => {
+      res => {
         if (res.didCancel) {
           return;
         }
         setResponse(res);
-      }
+      },
     );
   };
 

@@ -1,10 +1,31 @@
+import axios from 'axios';
 import React, { useState } from 'react';
-import { Text, Image, View, StyleSheet, TextInput } from 'react-native';
+import { Text, Image, View, StyleSheet, TextInput, Alert } from 'react-native';
 import MaterialButton from '../components/MaterialButton';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const SignInScreen = ({ navigation }) => {
   const [id, setId] = useState('');
   const [pw, setPw] = useState('');
+
+  const onLogin = async () => {
+    navigation.navigate('Profile');
+    try {
+      const response = await axios.post('http://localhost:8080/auth/login', {
+        email: id,
+        password: pw,
+      });
+      const token = response.data.token;
+      if (token) {
+        await AsyncStorage.setItem('token', token);
+        // navigation.navigate('Profile');
+      } else {
+        Alert('존재하지 않는 계정입니다');
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
   return (
     <View style={styles.body}>
       <View style={styles.header}>
@@ -17,18 +38,20 @@ const SignInScreen = ({ navigation }) => {
         <Text style={styles.headerText}>운동</Text>
       </View>
       <View style={styles.logIn}>
-        <TextInput style={styles.input} placeholder="id" />
+        <TextInput style={styles.input} placeholder="id" onChangeText={setId} />
         <TextInput
           style={styles.input}
           secureTextEntry={true}
           placeholder="pw"
+          onChangeText={setPw}
         />
       </View>
       <View style={styles.check}>
         <MaterialButton
           marginB={true}
           children={'로그인'}
-          onPress={() => navigation.navigate('Profile')}
+          onPress={onLogin}
+          // () => navigation.navigate('Profile')
         />
         <MaterialButton
           children={'회원가입'}

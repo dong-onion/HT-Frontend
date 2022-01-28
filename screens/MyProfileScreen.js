@@ -1,21 +1,49 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
+/* eslint-disable react-hooks/exhaustive-deps */
+import axios from 'axios';
+import React, { useEffect } from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Alert,
+  Image,
+} from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 import ProfileList from '../components/ProfileList';
-import { SignUpContext } from '../components/SignUpContext';
+import {
+  setActivateAciton,
+  setAgeAction,
+  setHeightAciton,
+  SetNicknameAction,
+  setWeightAciton,
+  getMyProfile,
+} from '../redux_modules/profile/profile.action';
+import { selectProfile } from '../redux_modules/profile/profile.reducer';
+import makeRequest from '../function/makeRequest';
 
-const MyProfileScreen = () => {
-  const [activate, setActivate] = useState(true);
-  const [text, setText] = useState('공개');
-  useEffect(() => {}, [text]);
-  // const [newData, setNewData] = useState({
-  //   age: age,
-  //   height: height,
-  //   nickName: nickName,
-  //   weight: weight,
-  // });
-  // const onPress = () => {
-  //   updateSignUpInfo(newData);
-  // };
+const MyProfileScreen = ({ navigation }) => {
+  const { nickname, age, height, weight, activate } =
+    useSelector(selectProfile);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getMyProfile());
+  }, []);
+  const postMyProfile = async () => {
+    navigation.navigate('JsonScreen');
+    await makeRequest({
+      method: 'POST',
+      url: '/users/profile/me',
+      data: {
+        nickname,
+        age,
+        height,
+        weight,
+        activate,
+      },
+    });
+  };
 
   const onActivate = () => {
     activate
@@ -27,11 +55,10 @@ const MyProfileScreen = () => {
             {
               text: '확인',
               onPress: () => {
-                setActivate(!activate);
-                /*프로필 공개여부 DB 전송*/
+                dispatch(setActivateAciton(!activate));
               },
             },
-          ]
+          ],
         )
       : Alert.alert(
           '프로필을 공개로 바꾸시겠습니까?',
@@ -41,66 +68,52 @@ const MyProfileScreen = () => {
             {
               text: '확인',
               onPress: () => {
-                setActivate(!activate);
-                /*프로필 공개여부 DB 전송*/
+                dispatch(setActivateAciton(!activate));
               },
             },
-          ]
+          ],
         );
-    setText(activate ? '공개' : '비공개');
   };
 
   return (
     <View style={styles.body}>
       <View style={styles.imgBox}>
-        <Text>이미지</Text>
+        <Image style={styles.profile} source={require('../assets/user.png')} />
       </View>
       <ProfileList
         label="닉네임 : "
-        // data={(val) =>
-        //   setNewData({
-        //     ...newData,
-        //     nickName: val,
-        //   })
-        // }
-        // text={nickName}
+        text={nickname}
+        onModify={text => {
+          dispatch(SetNicknameAction(text));
+        }}
       />
       <ProfileList
         label="나이 : "
-        // data={(val) =>
-        //   setNewData({
-        //     ...newData,
-        //     age: val,
-        //   })
-        // }
-        // text={age}
+        text={age}
+        onModify={text => {
+          dispatch(setAgeAction(text));
+        }}
       />
       <ProfileList
         label="체중 : "
-        // data={(val) =>
-        //   setNewData({
-        //     ...newData,
-        //     weight: val,
-        //   })
-        // }
-        // text={weight}
+        text={weight}
+        onModify={text => {
+          dispatch(setWeightAciton(text));
+        }}
       />
       <ProfileList
         label="신장 : "
-        // data={(val) =>
-        //   setNewData({
-        //     ...newData,
-        //     height: val,
-        //   })
-        // }
-        // text={height}
+        text={height}
+        onModify={text => {
+          dispatch(setHeightAciton(text));
+        }}
       />
       <View style={styles.BtnBox}>
-        <TouchableOpacity style={styles.Btn}>
+        <TouchableOpacity style={styles.Btn} onPress={postMyProfile}>
           <Text style={styles.textBtn}>확인</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.Btn} onPress={onActivate}>
-          <Text style={styles.textBtn}>{text}</Text>
+          <Text style={styles.textBtn}>{activate ? '공개' : '비공개'}</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -115,6 +128,19 @@ const styles = StyleSheet.create({
   imgBox: {
     flex: 1.4,
     backgroundColor: 'white',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 10,
+  },
+  profile: {
+    borderRadius: 50,
+    height: 100,
+    width: 100,
+    borderWidth: 1,
+    borderColor: '#aaaaaa',
+    backgroundColor: '#cccccc',
+    justifyContent: 'flex-end',
+    alignItems: 'flex-end',
   },
   inputBox: {
     paddingHorizontal: 5,
@@ -148,7 +174,6 @@ const styles = StyleSheet.create({
   },
   BtnBox: {
     flex: 1.9,
-
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     alignItems: 'center',

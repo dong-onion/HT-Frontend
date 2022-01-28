@@ -11,8 +11,7 @@ const FollowButton = ({ style, isFollowing }) => {
       <Pressable
         style={[styles.block, isFollowing && styles.followingBlock, style]}
         android_ripple={{ color: 'lightgray' }}
-        onPress={onPress}
-      >
+        onPress={onPress}>
         <Text style={[styles.text, isFollowing && styles.followingText]}>
           {isFollowing ? '팔로잉' : '팔로우'}
         </Text>

@@ -7,7 +7,7 @@ import {
   Text,
 } from 'react-native';
 
-const FixProfileInput = ({ isFix, data, value }) => {
+const FixProfileInput = ({ onFix }) => {
   const [text, setText] = useState('');
   return (
     <View style={styles.inputBox}>
@@ -15,11 +15,9 @@ const FixProfileInput = ({ isFix, data, value }) => {
       <TouchableOpacity
         style={styles.fixOpa}
         onPress={() => {
-          isFix(false);
-          // data(text);
-          // value(text);
-        }}
-      >
+          onFix(text);
+          console.log('Fix Profile Input : ', text);
+        }}>
         <Text>확인</Text>
       </TouchableOpacity>
     </View>
