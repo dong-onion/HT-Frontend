@@ -1,5 +1,4 @@
-/* 1월 13일 허준서
-팔로워/팔로우 리스트를 보여주는 top tab 네비게이터입니다. */
+// 팔로워/팔로우 리스트를 보여주는 top tab 네비게이터입니다.
 
 import React from 'react';
 import FollowerScreen from './FollowerScreen';

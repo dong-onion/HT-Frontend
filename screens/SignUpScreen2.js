@@ -1,5 +1,4 @@
-/* 1월 7일 허준서
-회원가입 두번째 화면입니다. */
+// 회원가입 두번째 화면입니다.
 
 import React, { useEffect, useRef, useState } from 'react';
 import { StyleSheet, View } from 'react-native';

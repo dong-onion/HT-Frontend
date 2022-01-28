@@ -1,5 +1,4 @@
-/* 1월 7일 허준서
-회원가입 첫번째 화면입니다. */
+// 회원가입 첫번째 화면입니다.
 
 import React, { useRef, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
@@ -9,6 +8,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { useDispatch } from 'react-redux';
 import { setEmail, setPassword } from '../redux_modules/signUp';
 import { TextField, FilledTextField } from 'rn-material-ui-textfield';
+import axios from 'axios';
 
 const SignUpScreen = () => {
   const navigation = useNavigation();
@@ -27,7 +27,9 @@ const SignUpScreen = () => {
 
   const dispatch = useDispatch();
 
-  const onPress = () => {
+  const onPress = async () => {
+    const r = await axios.get('http://13.209.45.119:8080/users/1/profile');
+    console.log(r);
     // 이메일 유효성 확인
     if (!localEmail) {
       const e = { ...errors, email: '이메일을 입력해주세요.' };

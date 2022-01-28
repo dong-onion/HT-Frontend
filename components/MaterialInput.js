@@ -1,5 +1,4 @@
-/* 1월 7일 허준서
-회원가입 화면에서 사용하려고 만든 input입니다. */
+// 회원가입 화면에서 사용하려고 만든 input입니다.
 
 import React from 'react';
 import { StyleSheet, View, Text, TextInput } from 'react-native';

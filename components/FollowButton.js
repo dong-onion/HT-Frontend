@@ -1,5 +1,5 @@
-/* 허준서 1월 16일
-팔로우 또는 팔로우 취소시 사용할 버튼입니다. */
+//팔로우 또는 팔로우 취소시 사용할 버튼입니다.
+
 import React from 'react';
 import { View, StyleSheet, Text, Pressable } from 'react-native';
 
