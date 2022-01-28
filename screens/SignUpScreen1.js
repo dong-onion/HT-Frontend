@@ -28,8 +28,6 @@ const SignUpScreen = () => {
   const dispatch = useDispatch();
 
   const onPress = async () => {
-    const r = await axios.get('http://13.209.45.119:8080/users/1/profile');
-    console.log(r);
     // 이메일 유효성 확인
     if (!localEmail) {
       const e = { ...errors, email: '이메일을 입력해주세요.' };
