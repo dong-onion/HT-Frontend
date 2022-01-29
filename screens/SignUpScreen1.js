@@ -22,7 +22,7 @@ const SignUpScreen = () => {
   const passwordRetype = useRef();
 
   const dispatch = useDispatch();
-  const signupState = useSelector((state) => state.signup);
+  const signupState = useSelector(state => state.signup);
 
   const onPress = () => {
     if (localPassword === localPasswordRetype) {
@@ -45,15 +45,15 @@ const SignUpScreen = () => {
     passwordRetype.current.focus();
   };
 
-  const onChangeEmail = (text) => {
+  const onChangeEmail = text => {
     setLocalEmail(text);
   };
 
-  const onChangePassword = (text) => {
+  const onChangePassword = text => {
     setLocalPassword(text);
   };
 
-  const onChangePasswordRetype = (text) => {
+  const onChangePasswordRetype = text => {
     setLocalPasswordRetype(text);
   };
 

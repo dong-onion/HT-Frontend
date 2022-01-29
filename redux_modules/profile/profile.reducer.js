@@ -2,7 +2,7 @@
 
 import { createReducer } from '@reduxjs/toolkit';
 import {
-  setActivateAciton,
+  setProfileStateAciton,
   setAgeAction,
   setFollowAction,
   setHeightAciton,
@@ -16,7 +16,7 @@ const initialState = {
   age: '',
   weight: '',
   height: '',
-  activate: false,
+  profileState: false,
   loading: false,
   data: null,
   error: null,
@@ -40,9 +40,9 @@ const reducer = createReducer(initialState, {
     const { height } = action.payload;
     state.height = height;
   },
-  [setActivateAciton.type]: (state, action) => {
-    const { activate } = action.payload;
-    state.activate = activate;
+  [setProfileStateAciton.type]: (state, action) => {
+    const { profileState } = action.payload;
+    state.profileState = profileState;
   },
   [setFollowAction.type]: (state, action) => {
     const { follow } = action.payload;
@@ -52,12 +52,12 @@ const reducer = createReducer(initialState, {
     state = { ...state, loading: true, data: null, error: null };
   },
   [getMyProfile.fulfilled]: (state, action) => {
-    const { nickname, age, height, weight, activate } = action.payload;
+    const { nickname, age, height, weight, profileState } = action.payload;
     state.nickname = nickname;
     state.age = age;
     state.height = height;
     state.weight = weight;
-    state.activate = activate;
+    state.profileState = profileState;
     state.data = action.payload;
     state.loading = false;
   },

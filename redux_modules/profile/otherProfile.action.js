@@ -27,7 +27,8 @@ export const setFollowAction = createAction(
 
 export const fetchJson = createAsyncThunk('fetch/json', async () => {
   try {
-    const res = await axios.get('https://jsonplaceholder.typicode.com/users');
+    const res = await axios.get('http://13.209.45.119:8080/users/1/profile');
+    console.log('Data', res.data);
     return res.data;
   } catch (error) {
     console.log(error);

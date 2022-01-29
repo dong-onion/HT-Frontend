@@ -11,6 +11,7 @@ const initialState = {
   loading: false,
   data: null,
   error: null,
+  profileState: false,
 };
 
 const otherProfileReducer = createReducer(initialState, {
@@ -18,12 +19,12 @@ const otherProfileReducer = createReducer(initialState, {
     state = { ...state, loading: true, data: null, error: null };
   },
   [getOtherProfile.fulfilled]: (state, action) => {
-    const { nickname, age, height, weight, activate } = action.payload;
+    const { nickname, age, height, weight, profileStatus } = action.payload;
     state.nickname = nickname;
     state.age = age;
     state.height = height;
     state.weight = weight;
-    state.activate = activate;
+    state.profileStatus = profileStatus;
     state.data = action.payload;
     state.loading = false;
   },
