@@ -1,5 +1,4 @@
-/* 1월 7일 허준서
-회원가입 정보 상태를 관리하기 위한 context api 컴포넌트입니다. */
+// 회원가입 정보 상태를 관리하기 위한 context api 컴포넌트입니다.
 
 import React from 'react';
 import { createContext, useState } from 'react';

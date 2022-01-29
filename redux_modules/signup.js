@@ -1,33 +1,39 @@
 // 회원가입 상태 관리를 위한 리덕스 모듈입니다.
 
 // 액션 타입
-const SET_EMAIL = 'signup/SET_EMAIL';
-const SET_PASSWORD = 'signup/SET_PASSWORD';
-const SET_NAME = 'signup/SET_NAME';
-const SET_GENDER = 'signup/SET_GENDER';
-const SET_WEIGHT = 'signup/SET_WEIGHT';
-const SET_HEIGHT = 'signup/SET_HEIGHT';
+const SET_EMAIL = 'signUp/SET_EMAIL';
+const SET_PASSWORD = 'signUp/SET_PASSWORD';
+const SET_NAME = 'signUp/SET_NAME';
+const SET_SEX = 'signUp/SET_SEX';
+const SET_WEIGHT = 'signUp/SET_WEIGHT';
+const SET_HEIGHT = 'signUp/SET_HEIGHT';
+const SET_AGE = 'signUp/SET_AGE';
+const SET_IMAGE = 'signUp/SET_IMAGE';
 
 // 액션 생성 함수
 export const setEmail = email => ({ type: SET_EMAIL, email });
+export const setAge = age => ({ type: SET_AGE, age });
 export const setPassword = password => ({ type: SET_PASSWORD, password });
-export const setNAME = name => ({ type: SET_NAME, name });
-export const setGender = gender => ({ type: SET_GENDER, gender });
+export const setName = name => ({ type: SET_NAME, name });
+export const setSex = sex => ({ type: SET_SEX, sex });
 export const setWeight = weight => ({ type: SET_WEIGHT, weight });
 export const setHeight = height => ({ type: SET_HEIGHT, height });
+export const setImage = image => ({ type: SET_IMAGE, image });
 
 // 초기 상태
 const initialState = {
-  email: undefined,
-  password: undefined,
-  name: undefined,
-  gender: undefined,
-  weight: undefined,
-  height: undefined,
+  email: null,
+  age: null,
+  password: null,
+  name: null,
+  sex: null,
+  weight: null,
+  height: null,
+  image: null,
 };
 
 // 리듀서
-const signup = (state = initialState, action) => {
+const reducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_EMAIL:
       return {
@@ -44,10 +50,10 @@ const signup = (state = initialState, action) => {
         ...state,
         name: action.name,
       };
-    case SET_GENDER:
+    case SET_SEX:
       return {
         ...state,
-        gender: action.gender,
+        sex: action.sex,
       };
     case SET_WEIGHT:
       return {
@@ -59,9 +65,19 @@ const signup = (state = initialState, action) => {
         ...state,
         height: action.height,
       };
+    case SET_AGE:
+      return {
+        ...state,
+        age: action.age,
+      };
+    case SET_IMAGE:
+      return {
+        ...state,
+        image: action.image,
+      };
     default:
       return state;
   }
 };
 
-export default signup;
+export default reducer;

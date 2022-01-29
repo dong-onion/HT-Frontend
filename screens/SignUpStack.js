@@ -1,6 +1,4 @@
-/* 1월 8일 허준서
-스택네비게이터
-두 개의 회원가입 화면을 관리하는 스택네비게이터입니다. */
+// 두 개의 회원가입 화면을 관리하는 스택네비게이터입니다.
 
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';

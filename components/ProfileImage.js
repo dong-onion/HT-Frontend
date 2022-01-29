@@ -1,16 +1,16 @@
-/* 1월 7일 허준서
-프로필 이미지 컴포넌트입니다.
-react-native-vector-icons,
-react-native-image-picker 라이브러리가 사용되었습니다. */
+// 프로필 이미지 컴포넌트입니다.
 
 import React, { useState } from 'react';
 import { Image, Platform, StyleSheet, Pressable, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { launchImageLibrary } from 'react-native-image-picker';
+import { setImage } from '../redux_modules/profileImage';
+import { useDispatch } from 'react-redux';
 
 const ProfileImage = ({ style }) => {
   const [response, setResponse] = useState(null);
-  console.log('res : ', response);
+  const dispatch = useDispatch();
+
   const onPress = () => {
     launchImageLibrary(
       {
@@ -24,7 +24,8 @@ const ProfileImage = ({ style }) => {
           return;
         }
         setResponse(res);
-      },
+        dispatch(setImage(res.assets[0].base64));
+      }
     );
   };
 
