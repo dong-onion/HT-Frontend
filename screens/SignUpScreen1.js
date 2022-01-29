@@ -8,7 +8,6 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { useDispatch } from 'react-redux';
 import { setEmail, setPassword } from '../redux_modules/signUp';
 import { TextField, FilledTextField } from 'rn-material-ui-textfield';
-import axios from 'axios';
 
 const SignUpScreen = () => {
   const navigation = useNavigation();

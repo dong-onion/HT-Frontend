@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-// import SignUpStack from './SignUpStack';
 import SignInStack from './SignInStack';
 import SignUpStack from './SignUpStack';
 import FollowTopTab from './FollowTopTab';
