@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   View,
   Text,
@@ -8,6 +8,7 @@ import {
   Alert,
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
+import ProfilePrivate from '../components/ProfilePrivate';
 import {
   getOtherProfile,
   setFollowAction,
@@ -16,7 +17,9 @@ import { selectOtherProfile } from '../redux_modules/profile/otherProfile.reduce
 setFollowAction;
 
 const ProfileScreen = ({ navigation }) => {
-  const { follow } = useSelector(selectOtherProfile);
+  const [profileStatus, setProfileStatus] = useState(false);
+  const { follow, nickname, age, weight, height } =
+    useSelector(selectOtherProfile);
   const dispatch = useDispatch();
   useEffect(() => {
     // dispatch(getOtherProfile(userID))
@@ -32,6 +35,7 @@ const ProfileScreen = ({ navigation }) => {
               text: '확인',
               onPress: () => {
                 dispatch(setFollowAction(!follow));
+                setProfileStatus(!profileStatus);
                 /*팔로잉 여부 전송*/
               },
             },
@@ -43,6 +47,7 @@ const ProfileScreen = ({ navigation }) => {
             text: '확인',
             onPress: () => {
               dispatch(setFollowAction(!follow));
+              setProfileStatus(!profileStatus);
               /*팔로잉 여부 전송*/
             },
           },
@@ -62,22 +67,29 @@ const ProfileScreen = ({ navigation }) => {
           </Text>
         </TouchableOpacity>
       </View>
-      <View style={styles.inputBox}>
-        <Text style={styles.textInput}>닉네임 : </Text>
-        <Text style={styles.textInput}>{'nickName'}</Text>
-      </View>
-      <View style={styles.inputBox}>
-        <Text style={styles.textInput}>나이 : </Text>
-        <Text style={styles.textInput}>{'age'}</Text>
-      </View>
-      <View style={styles.inputBox}>
-        <Text style={styles.textInput}>체중 : </Text>
-        <Text style={styles.textInput}>{'weight'}</Text>
-      </View>
-      <View style={styles.inputBox}>
-        <Text style={styles.textInput}>신장 : </Text>
-        <Text style={styles.textInput}>{'height'}</Text>
-      </View>
+      {profileStatus ? (
+        <>
+          <View style={styles.inputBox}>
+            <Text style={styles.textInput}>닉네임 : </Text>
+            <Text style={styles.textInput}>{'nickName'}</Text>
+          </View>
+          <View style={styles.inputBox}>
+            <Text style={styles.textInput}>나이 : </Text>
+            <Text style={styles.textInput}>{'age'}</Text>
+          </View>
+          <View style={styles.inputBox}>
+            <Text style={styles.textInput}>체중 : </Text>
+            <Text style={styles.textInput}>{'weight'}</Text>
+          </View>
+          <View style={styles.inputBox}>
+            <Text style={styles.textInput}>신장 : </Text>
+            <Text style={styles.textInput}>{'height'}</Text>
+          </View>
+        </>
+      ) : (
+        <ProfilePrivate />
+      )}
+
       <View style={styles.BtnBox}>
         <TouchableOpacity
           style={styles.Btn}

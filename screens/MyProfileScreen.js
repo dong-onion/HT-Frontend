@@ -1,5 +1,4 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import axios from 'axios';
 import React, { useEffect } from 'react';
 import {
   View,
@@ -12,7 +11,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import ProfileList from '../components/ProfileList';
 import {
-  setActivateAciton,
+  setProfileStateAciton,
   setAgeAction,
   setHeightAciton,
   SetNicknameAction,
@@ -21,9 +20,10 @@ import {
 } from '../redux_modules/profile/profile.action';
 import { selectProfile } from '../redux_modules/profile/profile.reducer';
 import makeRequest from '../function/makeRequest';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 const MyProfileScreen = ({ navigation }) => {
-  const { nickname, age, height, weight, activate } =
+  const { nickname, age, height, weight, profileState } =
     useSelector(selectProfile);
   const dispatch = useDispatch();
 
@@ -40,13 +40,13 @@ const MyProfileScreen = ({ navigation }) => {
         age,
         height,
         weight,
-        activate,
+        profileState,
       },
     });
   };
 
-  const onActivate = () => {
-    activate
+  const onProfileState = () => {
+    profileState
       ? Alert.alert(
           '프로필을 비공개로 바꾸시겠습니까?',
           '확인을 누르시면 비공개로 바뀌어집니다.',
@@ -55,7 +55,7 @@ const MyProfileScreen = ({ navigation }) => {
             {
               text: '확인',
               onPress: () => {
-                dispatch(setActivateAciton(!activate));
+                dispatch(setProfileStateAciton(!profileState));
               },
             },
           ],
@@ -68,7 +68,7 @@ const MyProfileScreen = ({ navigation }) => {
             {
               text: '확인',
               onPress: () => {
-                dispatch(setActivateAciton(!activate));
+                dispatch(setProfileStateAciton(!profileState));
               },
             },
           ],
@@ -76,7 +76,7 @@ const MyProfileScreen = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.body}>
+    <KeyboardAwareScrollView style={styles.body}>
       <View style={styles.imgBox}>
         <Image style={styles.profile} source={require('../assets/user.png')} />
       </View>
@@ -112,11 +112,11 @@ const MyProfileScreen = ({ navigation }) => {
         <TouchableOpacity style={styles.Btn} onPress={postMyProfile}>
           <Text style={styles.textBtn}>확인</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.Btn} onPress={onActivate}>
-          <Text style={styles.textBtn}>{activate ? '공개' : '비공개'}</Text>
+        <TouchableOpacity style={styles.Btn} onPress={onProfileState}>
+          <Text style={styles.textBtn}>{profileState ? '공개' : '비공개'}</Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </KeyboardAwareScrollView>
   );
 };
 
@@ -173,6 +173,7 @@ const styles = StyleSheet.create({
     borderColor: 'yellow',
   },
   BtnBox: {
+    marginTop: 60,
     flex: 1.9,
     flexDirection: 'row',
     justifyContent: 'space-evenly',

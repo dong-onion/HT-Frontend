@@ -1,6 +1,14 @@
 import axios from 'axios';
-import React, { useState } from 'react';
-import { Text, Image, View, StyleSheet, TextInput, Alert } from 'react-native';
+import React, { useRef, useState } from 'react';
+import {
+  Text,
+  Image,
+  View,
+  StyleSheet,
+  TextInput,
+  Alert,
+  Keyboard,
+} from 'react-native';
 import MaterialButton from '../components/MaterialButton';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -8,20 +16,25 @@ const SignInScreen = ({ navigation }) => {
   const [id, setId] = useState('');
   const [pw, setPw] = useState('');
 
+  const emailBox = useRef();
+  const pwBox = useRef();
+
   const onLogin = async () => {
     navigation.navigate('Profile');
     try {
-      const response = await axios.post('http://localhost:8080/auth/login', {
-        email: id,
-        password: pw,
-      });
-      const token = response.data.token;
-      if (token) {
-        await AsyncStorage.setItem('token', token);
-        // navigation.navigate('Profile');
-      } else {
+      const response = await axios.post(
+        'http://13.209.45.119:8080/auth/login',
+        {
+          email: id,
+          password: pw,
+        },
+      );
+      const token = response.data;
+      if (token === null) {
         Alert('존재하지 않는 계정입니다');
       }
+      AsyncStorage.setItem('token', token);
+      // navigation.navigate('Profile');
     } catch (e) {
       console.log(e);
     }
@@ -38,12 +51,21 @@ const SignInScreen = ({ navigation }) => {
         <Text style={styles.headerText}>운동</Text>
       </View>
       <View style={styles.logIn}>
-        <TextInput style={styles.input} placeholder="id" onChangeText={setId} />
+        <TextInput
+          style={styles.input}
+          placeholder="email"
+          onChangeText={setId}
+          keyboardType="email-address"
+          ref={emailBox}
+          onSubmitEditing={() => pwBox.current.focus()}
+          returnKeyType="next"
+        />
         <TextInput
           style={styles.input}
           secureTextEntry={true}
-          placeholder="pw"
+          placeholder="password"
           onChangeText={setPw}
+          ref={pwBox}
         />
       </View>
       <View style={styles.check}>
