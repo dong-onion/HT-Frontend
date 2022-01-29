@@ -2,8 +2,8 @@
 
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import SignUpScreen1 from './SignUpScreen1';
-import SignUpScreen2 from './SignUpScreen2';
+import SignUpScreen1 from '../screens/SignUpScreen1';
+import SignUpScreen2 from '../screens/SignUpScreen2';
 import { SignUpContextProvider } from '../components/SignUpContext';
 import ProfileImage from '../components/ProfileImage';
 

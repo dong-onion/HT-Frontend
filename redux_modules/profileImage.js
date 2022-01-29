@@ -2,7 +2,7 @@
 
 const SET_IMAGE = 'profileImage/SET_IMAGE';
 
-export const setImage = (image) => ({ type: SET_IMAGE, image });
+export const setImage = image => ({ type: SET_IMAGE, image });
 
 const initialState = {
   image: null,
