@@ -25,7 +25,7 @@ const ProfileImage = ({ style }) => {
         }
         setResponse(res);
         dispatch(setImage(res.assets[0].base64));
-      }
+      },
     );
   };
 

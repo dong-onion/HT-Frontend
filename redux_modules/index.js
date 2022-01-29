@@ -8,7 +8,9 @@ import reducer from './profile/profile.reducer';
 import otherProfileReducer from './profile/otherProfile.reducer';
 
 const rootReducer = combineReducers({
-  signUp, signUpAPI, profileImage,
+  signUp,
+  signUpAPI,
+  profileImage,
   profile: reducer,
   otherProfile: otherProfileReducer,
 });
