@@ -48,7 +48,7 @@ const SignUpScreen2 = () => {
 
   const mounted = useRef();
   useEffect(() => {
-    if (!mounted) {
+    if (!mounted.current) {
       mounted.current = true;
     } else {
       console.log(signUpState);
