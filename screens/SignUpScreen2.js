@@ -53,8 +53,9 @@ const SignUpScreen2 = () => {
     } else {
       console.log(signUpState);
       dispatch(requestSignUp(signUpState));
+      navigation.navigate('MainBottomTab');
     }
-  }, [signUpState, dispatch]);
+  }, [signUpState, dispatch, navigation]);
 
   const NAMEERROR = '이름을 입력해주세요.';
   const AGEERROR = '나이를 입력해주세요.';
@@ -92,7 +93,6 @@ const SignUpScreen2 = () => {
   const onPress = () => {
     if (checkFields()) {
       dispatchAll();
-      //navigation.navigate('FollowTopTab');
     }
   };
 
