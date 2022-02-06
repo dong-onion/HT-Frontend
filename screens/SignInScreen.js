@@ -1,14 +1,6 @@
 import axios from 'axios';
 import React, { useRef, useState } from 'react';
-import {
-  Text,
-  Image,
-  View,
-  StyleSheet,
-  TextInput,
-  Alert,
-  Keyboard,
-} from 'react-native';
+import { Text, Image, View, StyleSheet, TextInput, Alert } from 'react-native';
 import MaterialButton from '../components/MaterialButton';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -20,7 +12,6 @@ const SignInScreen = ({ navigation }) => {
   const pwBox = useRef();
 
   const onLogin = async () => {
-    navigation.navigate('Profile');
     try {
       const response = await axios.post(
         'http://13.209.45.119:8080/auth/login',
@@ -29,12 +20,14 @@ const SignInScreen = ({ navigation }) => {
           password: pw,
         },
       );
-      const token = response.data;
+      console.log('token :', response.data.data);
+      const token = response.data.data;
       if (token === null) {
-        Alert('존재하지 않는 계정입니다');
+        Alert.alert('존재하지 않는 계정입니다');
+      } else {
+        AsyncStorage.setItem('token', token);
+        navigation.navigate('Profile');
       }
-      AsyncStorage.setItem('token', token);
-      // navigation.navigate('Profile');
     } catch (e) {
       console.log(e);
     }

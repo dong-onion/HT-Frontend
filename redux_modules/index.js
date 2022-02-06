@@ -6,6 +6,7 @@ import signUpAPI from './signUpAPI';
 import profileImage from './profileImage';
 import reducer from './profile/profile.reducer';
 import otherProfileReducer from './profile/otherProfile.reducer';
+import workoutReducer from './workout/workout.reducer';
 
 const rootReducer = combineReducers({
   signUp,
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   profileImage,
   profile: reducer,
   otherProfile: otherProfileReducer,
+  workout: workoutReducer,
 });
 
 export default rootReducer;

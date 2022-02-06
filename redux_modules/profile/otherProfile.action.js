@@ -10,9 +10,10 @@ export const getOtherProfile = createAsyncThunk(
         method: 'GET',
         // url: `/users/${userId}/profile`,
       });
+      console.log('getOtherProfile :', res.data);
       return res;
     } catch (error) {
-      console.log(error);
+      console.log('getOtherProfile :', error);
       return {};
     }
   },

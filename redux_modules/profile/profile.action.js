@@ -37,9 +37,10 @@ export const getMyProfile = createAsyncThunk(
   async () => {
     try {
       const res = makeRequest({ method: 'GET', url: '/users/profile/me' });
-      return res;
+      console.log('myProfile: ', res.data);
+      return res.data;
     } catch (error) {
-      console.log(error);
+      console.log('myProfile', error);
       return {};
     }
   },

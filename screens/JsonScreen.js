@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchJson } from '../redux_modules/profile/otherProfile.action';
 import { selectOtherProfile } from '../redux_modules/profile/otherProfile.reducer';
 
-const JsonScreen = () => {
+const JsonScreen = ({ navigation }) => {
   // const { data } = useSelector(selectOtherProfile);
   // const dispatch = useDispatch();
   // console.log('JsonScreen: ', data);
@@ -14,10 +14,11 @@ const JsonScreen = () => {
   // }, []);
   const [fetchData, setFetchData] = useState({});
   const onPress = async () => {
-    const res = await axios.get('http://13.209.45.119:8080/users/1/profile');
-    console.log(res.data.data.name);
-    const { data } = res;
-    setFetchData(res.data.data);
+    const {
+      data: { data },
+    } = await axios.get('http://13.209.45.119:8080/users/1/profile');
+
+    setFetchData(data);
   };
 
   return (
@@ -30,6 +31,12 @@ const JsonScreen = () => {
       )}
 
       <Button title="btn" onPress={onPress} />
+      <Button
+        title="운동리스트"
+        onPress={() =>
+          navigation.navigate('WorkoutStack', { screen: 'MyWorkout' })
+        }
+      />
     </View>
     // <View>
     //   {data &&
