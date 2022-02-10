@@ -1,21 +1,40 @@
 import SelectDropdown from 'react-native-select-dropdown';
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+
 import NormalInput from '../components/NormalInput';
 import MaterialButton from '../components/MaterialButton';
 import { useDispatch } from 'react-redux';
 import { setAction } from '../redux_modules/workout/workout.action';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import makeRequest from '../function/makeRequest';
 
-const SelectExercise = ({ navigation }) => {
+const SelectExercise = ({ route, navigation }) => {
+  const { title, time } = route.params;
   const dispatch = useDispatch();
   const [part, setPart] = useState([]);
-  const [selectedPart, setSelectedPart] = useState('');
+  const [type, setType] = useState('');
   const [name, setName] = useState('');
-  const [set, setSet] = useState('');
-  const [weight, setWeight] = useState('');
-  const [count, setCount] = useState('');
+  const [set, setSet] = useState(0);
+  const [weight, setWeight] = useState(0);
+  const [count, setCount] = useState(0);
+  const onPress = async () => {
+    const uniqueNum = Date.now();
+    dispatch(setAction(uniqueNum, type, weight, count, set, name));
+    navigation.navigate('Routine', { title, time });
+    await makeRequest({
+      method: 'POST',
+      url: '',
+      data: {
+        type,
+        name,
+        weight,
+        count,
+        set,
+      },
+      //return ?? setID
+    });
+  };
   useEffect(() => {
     setTimeout(() => {
       setPart([
@@ -38,9 +57,9 @@ const SelectExercise = ({ navigation }) => {
           data={part}
           onSelect={(selectedItem, index) => {
             console.log(selectedItem, index);
-            setSelectedPart(selectedItem);
+            setType(selectedItem);
           }}
-          defaultButtonText={'Select Part'}
+          defaultButtonText={'Select Type'}
           buttonStyle={styles.selectBtn}
         />
       </View>
@@ -73,14 +92,7 @@ const SelectExercise = ({ navigation }) => {
         />
       </View>
       <View style={styles.Btn}>
-        <MaterialButton
-          children={'저장'}
-          onPress={() => {
-            const id = Date.now();
-            dispatch(setAction(id, selectedPart, weight, count, set, name));
-            navigation.navigate('Routine');
-          }}
-        />
+        <MaterialButton children={'저장'} onPress={onPress} />
       </View>
     </KeyboardAwareScrollView>
   );

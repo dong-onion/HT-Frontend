@@ -2,20 +2,6 @@ import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 
-const data = [
-  {
-    title: '월요일',
-    Action: [
-      { id: 123, name: '벤치', weight: 100, count: 10, set: 5 },
-      { id: 356, name: '숄더', weight: 40, count: 10, set: 5 },
-    ],
-  },
-  {
-    title: '화요일',
-    Action: [{ id: 543, name: '바벨', weight: 10, count: 10, set: 5 }],
-  },
-];
-
 const WorkoutListItem = ({ name, id, weight, set, count, onDelete }) => {
   return (
     <>

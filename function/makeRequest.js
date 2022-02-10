@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -7,10 +8,15 @@ const makeRequest = async config => {
   const requestConfiguration = {
     ...config,
     baseURL,
-    Headers: { X_AUTH_TOKEN: token },
+    Headers: { 'X_AUTH_TOKEN': token, ...config.headers },
   };
   const { data } = await axios(requestConfiguration);
-  return data;
+  if (data) {
+    return data;
+  } else {
+    return null;
+  }
+  // return data ? data : null
 };
 
 export default makeRequest;
