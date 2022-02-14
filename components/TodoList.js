@@ -2,13 +2,18 @@ import React from 'react';
 import TodoCard from './TodoCard';
 import { View, StyleSheet } from 'react-native';
 
-const list = [1, 2, 3];
-
-const TodoList = () => {
+const TodoList = ({ workout }) => {
   return (
     <View style={styles.container}>
-      {list.map((item, index) => (
-        <TodoCard style={styles.card} key={item} />
+      {workout?.map((item, index) => (
+        <TodoCard
+          style={styles.card}
+          key={item.name}
+          name={item.name}
+          count={item.count}
+          set={item.set}
+          timer={item.timer}
+        />
       ))}
     </View>
   );

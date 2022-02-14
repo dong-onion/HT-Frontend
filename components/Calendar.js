@@ -1,11 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Calendar } from 'react-native-calendars';
 import { useDispatch, useSelector } from 'react-redux';
 import { setDay } from '../redux_modules/day';
-
-const onDayPress = day => {
-  console.log('selected day', day);
-};
 
 const CustomCalendar = () => {
   const dispatch = useDispatch();
@@ -13,7 +9,7 @@ const CustomCalendar = () => {
   return (
     <Calendar
       onDayPress={day => {
-        onDayPress(day);
+        dispatch(setDay(day.dateString));
       }}
       onPressArrowLeft={subtractMonth => subtractMonth()}
       onPressArrowRight={addMonth => addMonth()}

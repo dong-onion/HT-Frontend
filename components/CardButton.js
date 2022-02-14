@@ -3,16 +3,7 @@ import { StyleSheet, Pressable, Text } from 'react-native';
 import { API } from '../lib/API';
 import axios from 'axios';
 
-const onPress = async () => {
-  //console.log('누름');
-  //const res = await API.get('/users/1/profile');
-  //console.log(res);
-  const res2 = await API.post('/auth/login', {
-    email: 'www',
-    password: 'www',
-  });
-  console.log(res2.data);
-};
+const onPress = () => {};
 
 const CardButton = ({ style }) => {
   return (
