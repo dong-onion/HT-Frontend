@@ -6,11 +6,15 @@ import signUpAPI from './signUpAPI';
 import profileImage from './profileImage';
 import reducer from './profile/profile.reducer';
 import otherProfileReducer from './profile/otherProfile.reducer';
+import day from './day';
+import calendar from './calendar';
 
 const rootReducer = combineReducers({
   signUp,
   signUpAPI,
   profileImage,
+  day,
+  calendar,
   profile: reducer,
   otherProfile: otherProfileReducer,
 });

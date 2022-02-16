@@ -1,9 +1,9 @@
 import * as signUpAPI from '../lib/signUpAPI';
 
 // 액션
-const SIGNUP = 'SIGNUP';
-const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS';
-const SIGNUP_FAIL = 'SIGNUP_ERROR';
+const SIGNUP = 'signupapi/SIGNUP';
+const SIGNUP_SUCCESS = 'signupapi/SIGNUP_SUCCESS';
+const SIGNUP_FAIL = 'signupapi/SIGNUP_ERROR';
 
 // 회원가입 요청
 export const requestSignUp = data => async (dispatch, getState) => {
@@ -28,11 +28,11 @@ const initialState = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case SIGNUP:
-      return { ...state, loading: true };
+      return { loading: true, response: null, error: null };
     case SIGNUP_SUCCESS:
-      return { ...state, data: action.response };
+      return { loading: false, response: action.response, error: null };
     case SIGNUP_FAIL:
-      return { ...state, error: action.error };
+      return { loading: false, response: null, error: action.error };
     default:
       return state;
   }

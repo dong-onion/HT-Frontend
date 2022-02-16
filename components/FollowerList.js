@@ -64,7 +64,7 @@ const FollowerList = () => {
 
   return (
     <ScrollView>
-      {userList.map((user) => (
+      {userList.map(user => (
         <FollowerListItem user={user} key={user.id} />
       ))}
     </ScrollView>

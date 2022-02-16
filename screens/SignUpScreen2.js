@@ -51,10 +51,18 @@ const SignUpScreen2 = () => {
     if (!mounted.current) {
       mounted.current = true;
     } else {
-      console.log(signUpState);
-      dispatch(requestSignUp(signUpState));
+      if (!loading && !response && !error) {
+        dispatch(requestSignUp(signUpState));
+      } else if (loading) {
+        console.log(loading);
+      } else {
+        console.log(loading);
+        console.log(response);
+        console.log(error);
+        navigation.navigate('MainBottomTab');
+      }
     }
-  }, [signUpState, dispatch]);
+  }, [signUpState, dispatch, navigation, loading, response, error]);
 
   const NAMEERROR = '이름을 입력해주세요.';
   const AGEERROR = '나이를 입력해주세요.';
@@ -92,7 +100,6 @@ const SignUpScreen2 = () => {
   const onPress = () => {
     if (checkFields()) {
       dispatchAll();
-      //navigation.navigate('FollowTopTab');
     }
   };
 

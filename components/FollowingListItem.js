@@ -1,10 +1,10 @@
 // FollowingList에서 참조하는 팔로잉리스트 아이템입니다.
 
 import React from 'react';
-import {StyleSheet, Image, View, Text} from 'react-native';
+import { StyleSheet, Image, View, Text } from 'react-native';
 import FollowButton from './FollowButton';
 
-const FollowingListItem = ({user}) => {
+const FollowingListItem = ({ user }) => {
   return (
     <View style={styles.block}>
       <View style={styles.profileBlock}>
@@ -45,9 +45,9 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     backgroundColor: '#cccccc',
   },
-  id: {fontWeight: 'bold'},
+  id: { fontWeight: 'bold' },
   nickname: {},
-  button: {marginRight: 20},
+  button: { marginRight: 20 },
 });
 
 export default FollowingListItem;
