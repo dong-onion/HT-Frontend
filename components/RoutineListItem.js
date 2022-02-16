@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { StyleSheet, TouchableOpacity, View, Text } from 'react-native';
+import React from 'react';
+import { StyleSheet, TouchableOpacity, Text } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 
 const RoutineListItem = ({ id, title, onPress, onDelete, onFix }) => {

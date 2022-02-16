@@ -7,6 +7,8 @@ import SignUpStack from './SignUpStack';
 import FollowTopTab from './FollowTopTab';
 import WorkoutStack from './WorkoutStack';
 import SplashStack from './SplashStack';
+import MainBottomTab from './MainBottomTab';
+
 const Stack = createNativeStackNavigator();
 
 const RootStack = () => {
@@ -17,6 +19,7 @@ const RootStack = () => {
       <Stack.Screen name="SignUpStack" component={SignUpStack} />
       <Stack.Screen name="FollowTopTab" component={FollowTopTab} />
       <Stack.Screen name="WorkoutStack" component={WorkoutStack} />
+      <Stack.Screen name="MainBottomTab" component={MainBottomTab} />
     </Stack.Navigator>
   );
 };
