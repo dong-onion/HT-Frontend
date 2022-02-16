@@ -1,4 +1,7 @@
 /* eslint-disable prettier/prettier */
+
+//앱 실행시 실행되는 최초화면입니다 현재는 토큰이 유효하면 로그인화면 없이 프로필 화면으로 이동하게 만들었습니다
+
 import { useIsFocused } from '@react-navigation/native';
 import React, { useEffect } from 'react';
 import {  StyleSheet, Text, View, Image } from 'react-native';

@@ -1,4 +1,7 @@
 /* eslint-disable prettier/prettier */
+
+// 회원가입후 로그인이후에 실행되는 화면입니다 'auth/chkeck'로 본인 userId를 받습니다
+
 import { useIsFocused } from '@react-navigation/native';
 import React, { useEffect } from 'react';
 import {  StyleSheet, Text, View, Image } from 'react-native';
