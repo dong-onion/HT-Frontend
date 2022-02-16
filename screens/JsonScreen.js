@@ -16,6 +16,10 @@ const JsonScreen = ({ navigation }) => {
           navigation.navigate('WorkoutStack', { screen: 'MyWorkout' })
         }
       />
+      <Button
+        title="메인화면"
+        onPress={() => navigation.navigate('MainBottomTab')}
+      />
     </View>
   );
 };

@@ -102,7 +102,6 @@ const ProfileScreen = ({ navigation }) => {
       <View style={styles.BtnBox}>
         <TouchableOpacity
           style={styles.Btn}
-          // onPress={() => navigation.navigate('SplashScreen')}>
           onPress={() => navigation.navigate('MyProfile')}>
           <Text style={styles.textBtn}>확인</Text>
         </TouchableOpacity>
