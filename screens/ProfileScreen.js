@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import {
   View,
   Text,
@@ -15,15 +15,24 @@ import {
 } from '../redux_modules/profile/otherProfile.action';
 import { selectOtherProfile } from '../redux_modules/profile/otherProfile.reducer';
 setFollowAction;
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useFocusEffect } from '@react-navigation/native';
 const ProfileScreen = ({ navigation }) => {
   const [profileStatus, setProfileStatus] = useState(false);
-  const { follow, nickname, age, weight, height } =
-    useSelector(selectOtherProfile);
+  const { follow, name, age, weight, height } = useSelector(selectOtherProfile);
   const dispatch = useDispatch();
-  useEffect(() => {
-    // dispatch(getOtherProfile(userID))
-  }, []);
+
+  const getUserId = async () => {
+    //타인 userId parmas 로 받아야함 or Asyncstorage or redux
+    const userId = await AsyncStorage.getItem('MyUserId');
+    dispatch(getOtherProfile(userId));
+  };
+
+  useFocusEffect(
+    useCallback(() => {
+      getUserId();
+    }, []),
+  );
   const followOnpress = () => {
     follow
       ? Alert.alert(
@@ -71,19 +80,19 @@ const ProfileScreen = ({ navigation }) => {
         <>
           <View style={styles.inputBox}>
             <Text style={styles.textInput}>닉네임 : </Text>
-            <Text style={styles.textInput}>{'nickName'}</Text>
+            <Text style={styles.textInput}>{name}</Text>
           </View>
           <View style={styles.inputBox}>
             <Text style={styles.textInput}>나이 : </Text>
-            <Text style={styles.textInput}>{'age'}</Text>
+            <Text style={styles.textInput}>{age}</Text>
           </View>
           <View style={styles.inputBox}>
             <Text style={styles.textInput}>체중 : </Text>
-            <Text style={styles.textInput}>{'weight'}</Text>
+            <Text style={styles.textInput}>{weight}</Text>
           </View>
           <View style={styles.inputBox}>
             <Text style={styles.textInput}>신장 : </Text>
-            <Text style={styles.textInput}>{'height'}</Text>
+            <Text style={styles.textInput}>{height}</Text>
           </View>
         </>
       ) : (
@@ -93,6 +102,7 @@ const ProfileScreen = ({ navigation }) => {
       <View style={styles.BtnBox}>
         <TouchableOpacity
           style={styles.Btn}
+          // onPress={() => navigation.navigate('SplashScreen')}>
           onPress={() => navigation.navigate('MyProfile')}>
           <Text style={styles.textBtn}>확인</Text>
         </TouchableOpacity>

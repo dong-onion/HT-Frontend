@@ -3,12 +3,9 @@
 import { createAction, createAsyncThunk } from '@reduxjs/toolkit';
 import makeRequest from '../../function/makeRequest';
 
-export const SetNicknameAction = createAction(
-  'profile/setNicknameAciton',
-  nickname => {
-    return { payload: { nickname } };
-  },
-);
+export const SetNameAction = createAction('profile/setNameAciton', name => {
+  return { payload: { name } };
+});
 
 export const setAgeAction = createAction('profile/setAgeAction', age => {
   return { payload: { age } };
@@ -36,11 +33,13 @@ export const getMyProfile = createAsyncThunk(
   'myProfile/getMyProfile',
   async () => {
     try {
-      const res = makeRequest({ method: 'GET', url: '/users/profile/me' });
-      console.log('myProfile: ', res.data);
+      const res = await makeRequest({
+        method: 'GET',
+        url: '/users/profile/me',
+      });
       return res.data;
     } catch (error) {
-      console.log('myProfile', error);
+      console.log('myProfile action', error);
       return {};
     }
   },

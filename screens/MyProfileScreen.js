@@ -14,7 +14,7 @@ import {
   setProfileStateAciton,
   setAgeAction,
   setHeightAciton,
-  SetNicknameAction,
+  SetNameAction,
   setWeightAciton,
   getMyProfile,
 } from '../redux_modules/profile/profile.action';
@@ -23,24 +23,28 @@ import makeRequest from '../function/makeRequest';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 const MyProfileScreen = ({ navigation }) => {
-  const { nickname, age, height, weight, profileState } =
+  const { name, age, height, weight, profileState } =
     useSelector(selectProfile);
+  console.log('name :', name);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getMyProfile());
   }, []);
+
   const postMyProfile = async () => {
     navigation.navigate('JsonScreen');
     await makeRequest({
       method: 'POST',
       url: '/users/profile/me',
       data: {
-        nickname,
+        name: name,
         age,
         height,
         weight,
         profileState,
+        sex: 'F',
+        email: 'dongEon',
       },
     });
   };
@@ -82,9 +86,9 @@ const MyProfileScreen = ({ navigation }) => {
       </View>
       <ProfileList
         label="닉네임 : "
-        text={nickname}
+        text={name}
         onModify={text => {
-          dispatch(SetNicknameAction(text));
+          dispatch(SetNameAction(text));
         }}
       />
       <ProfileList

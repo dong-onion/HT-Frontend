@@ -11,37 +11,42 @@ import RoutineListItem from '../components/RoutineListItem';
 import makeRequest from '../function/makeRequest';
 import Modal from 'react-native-modal';
 import WorkoutModal from '../components/WorkoutModal';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const MyWorkout = ({ navigation }) => {
-  useEffect(() => {
-    const res = makeRequest({
-      method: 'GET',
-      url: '/users/{id}/workout-list/all',
-    });
-    console.log(res.data);
-    console.log('isRender');
-    // setRoutineList(res.data);
-  }, [routineList, routineTitle]);
+  const getMyWorkout = async () => {
+    const MyUserId = await AsyncStorage.getItem('MyUserId');
 
-  const [routineList, setRoutineList] = useState([
-    { id: 1, title: '목', time: 120 },
-    { id: 2, title: '배', time: 140 },
-  ]);
+    const res = await makeRequest({
+      method: 'GET',
+      url: `/users/${MyUserId}/workout-list/all`,
+    });
+    setRoutineList(res.data);
+  };
+  useEffect(() => {
+    getMyWorkout();
+  }, []);
+
+  const [routineList, setRoutineList] = useState([]);
   const [isModalVisible, setModalVisible] = useState(false);
-  const [routineTitle, setRoutineTitle] = useState('');
-  const [routineTime, setRoutineTime] = useState(0);
-  const sendData = async () => {
-    await makeRequest({
+
+  const sendData = async (title, time) => {
+    console.log('sendData routineTitle : ', title);
+    console.log('sendData routineTime : ', time);
+    const res = await makeRequest({
       method: 'POST',
       url: '/users/workout-list',
-      data: { title: routineTitle, time: routineTime },
+      data: { title: title, time: time },
     });
+    console.log('MyWorkout/sendData : ', res.data);
+    getMyWorkout();
   };
   const onPress = () => {
     setModalVisible(!isModalVisible);
   };
   const onDelete = async (id, title) => {
-    setRoutineList([...routineList.filter(el => el.id !== id)]);
+    console.log('id : ', id, 'title : ', title);
+    setRoutineList([...routineList.filter(el => el.exerciseListId !== id)]);
     await makeRequest({
       method: 'DELETE',
       url: `/users/workout-list/${title}`,
@@ -55,14 +60,7 @@ const MyWorkout = ({ navigation }) => {
       </TouchableOpacity>
       <Modal isVisible={isModalVisible}>
         <View style={styles.modal}>
-          <WorkoutModal
-            routineTitle={title => {
-              setRoutineTitle(title);
-            }}
-            routineTime={time => setRoutineTime(time)}
-            isVisi={v => setModalVisible(v)}
-            sendData={sendData}
-          />
+          <WorkoutModal isVisi={v => setModalVisible(v)} sendData={sendData} />
         </View>
       </Modal>
       <View style={styles.listBox}>
@@ -70,11 +68,11 @@ const MyWorkout = ({ navigation }) => {
           <Text style={styles.text}>나만의 운동루틴을 만들어보세요!</Text>
         ) : (
           <FlatList
-            keyExtractor={item => item.id}
+            keyExtractor={item => item.exerciseListId}
             data={routineList}
             renderItem={({ item }) => (
               <RoutineListItem
-                id={item.id}
+                id={item.exerciseListId}
                 title={item.title}
                 onPress={() =>
                   navigation.navigate('Routine', {

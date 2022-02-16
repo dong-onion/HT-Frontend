@@ -1,9 +1,8 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { getOtherProfile, setFollowAction } from './otherProfile.action';
-import { fetchJson } from './otherProfile.action';
 
 const initialState = {
-  nickname: '',
+  name: '',
   age: '',
   weight: '',
   height: '',
@@ -19,8 +18,8 @@ const otherProfileReducer = createReducer(initialState, {
     state = { ...state, loading: true, data: null, error: null };
   },
   [getOtherProfile.fulfilled]: (state, action) => {
-    const { nickname, age, height, weight, profileStatus } = action.payload;
-    state.nickname = nickname;
+    const { name, age, height, weight, profileStatus } = action.payload;
+    state.name = name;
     state.age = age;
     state.height = height;
     state.weight = weight;
@@ -34,17 +33,6 @@ const otherProfileReducer = createReducer(initialState, {
   },
   [setFollowAction.type]: (state, action) => {
     state.follow = action.payload.follow;
-  },
-  [fetchJson.pending]: state => {
-    state = { loading: true, data: null, error: null };
-  },
-  [fetchJson.fulfilled]: (state, action) => {
-    state.data = action.payload;
-    state.loading = false;
-  },
-  [fetchJson.rejected]: (state, action) => {
-    state.error = action.error;
-    state.loading = false;
   },
 });
 

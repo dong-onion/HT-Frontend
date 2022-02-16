@@ -2,7 +2,15 @@ import { createReducer } from '@reduxjs/toolkit';
 import { deleteAction, getMyWorkoutList, setAction } from './workout.action';
 
 const initialState = {
-  actions: [],
+  actions: [
+    {
+      type: '',
+      weight: 0,
+      name: '',
+      count: 0,
+      set: 0,
+    },
+  ],
   loading: false,
   data: null,
   error: null,
@@ -10,24 +18,21 @@ const initialState = {
 
 const workoutReducer = createReducer(initialState, {
   [setAction.type]: (state, action) => {
-    const { uniqueNum, type, name, weight, count, set } = action.payload;
-    state.actions = [
-      ...state.actions,
-      { uniqueNum, type, name, weight, count, set },
-    ];
+    const { type, name, weight, count, set } = action.payload;
+    state.actions = [...state.actions, { type, name, weight, count, set }];
   },
 
   [deleteAction.type]: (state, action) => {
-    const { uniqueNum } = action.payload;
-    state.actions = [...state.actions.filter(el => el.uniqueNum !== uniqueNum)];
+    const { exerciseHistoryId } = action.payload;
+    state.actions = [
+      ...state.actions.filter(el => el.exerciseHistoryId !== exerciseHistoryId),
+    ];
   },
   [getMyWorkoutList.pending]: state => {
     state = { ...state, loading: true, data: null, error: null };
   },
   [getMyWorkoutList.fulfilled]: (state, action) => {
     state.actions = [...action.payload];
-    // const { id, name, type, weight, count, set } = action.payload;
-    // state.actions = [...state.actions, { id, name, type, weight, count, set }];
     state.data = action.payload;
   },
   [getMyWorkoutList.rejected]: (state, action) => {

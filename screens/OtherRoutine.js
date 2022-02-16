@@ -1,47 +1,29 @@
 import React, { useEffect } from 'react';
-import {
-  StyleSheet,
-  View,
-  TouchableOpacity,
-  Text,
-  FlatList,
-} from 'react-native';
-import Icon from 'react-native-vector-icons/AntDesign';
-
+import { StyleSheet, View, Text, FlatList } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import MaterialButton from '../components/MaterialButton';
 import WorkoutListItem from '../components/WorkoutListItem';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectActions } from '../redux_modules/workout/workout.reducer';
-import {
-  deleteAction,
-  getMyWorkoutList,
-} from '../redux_modules/workout/workout.action';
-import makeRequest from '../function/makeRequest';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { getMyWorkoutList } from '../redux_modules/workout/workout.action';
 
-const Routine = ({ route, navigation }) => {
+const OtherRoutine = ({ route, navigation }) => {
   const dispatch = useDispatch();
   const workoutList = useSelector(selectActions);
   const { title, time } = route.params;
-  const getMyUserId = async () => {
-    const MyUserId = await AsyncStorage.getItem('MyUserId');
+  const getUserId = async () => {
+    //userId params로 받아야함 or AsyncStorage로 받음 or redux로 관리
+    const UserId = await AsyncStorage.getItem('MyUserId');
 
-    dispatch(getMyWorkoutList({ userId: MyUserId, title: title }));
+    dispatch(getMyWorkoutList({ userId: UserId, title: title }));
   };
   useEffect(() => {
-    getMyUserId();
+    getUserId();
   }, [navigation]);
 
-  const onDelete = async exerciseHistoryId => {
-    dispatch(deleteAction(exerciseHistoryId));
-    await makeRequest({
-      method: 'DELETE',
-      url: `/users/${exerciseHistoryId}/workout-list/workout`,
-    });
-  };
-  const onPress = async () => {
-    navigation.navigate('MyWorkout');
+  const onPress = () => {
+    navigation.navigate('OtherWorkout');
   };
 
   return (
@@ -50,32 +32,26 @@ const Routine = ({ route, navigation }) => {
         <Text style={styles.titleText}>{title}</Text>
         <Text style={styles.timeText}>예상소요시간 : {time}분</Text>
       </View>
-      <TouchableOpacity
-        style={styles.Add}
-        // onPress={() => navigation.navigate('OtherWorkout')}>
-        onPress={() => navigation.navigate('SelectExercise', { title, time })}>
-        <Icon name="pluscircle" size={28} style={{ marginRight: 7 }} />
-        <Text>운동 추가하기</Text>
-      </TouchableOpacity>
+      <View style={styles.Add} />
       <View style={styles.listBox}>
         <FlatList
-          keyExtractor={item => item.exerciseHistoryId}
+          keyExtractor={item => item.uniqueNum}
           data={workoutList}
           renderItem={({ item }) => (
             <WorkoutListItem
               name={item.name}
-              exerciseHistoryId={item.exerciseHistoryId}
+              uniqueNum={item.uniqueNum}
               count={item.count}
               weight={item.weight}
               set={item.set}
-              onDelete={() => onDelete(item.exerciseHistoryId)}
+              onFix={true}
             />
           )}
         />
       </View>
       <View style={styles.Btn}>
         <MaterialButton
-          children={'저장'}
+          children={'확인'}
           onPress={onPress}
           style={{ backgroundColor: '#d5e1df' }}
         />
@@ -125,4 +101,4 @@ const styles = StyleSheet.create({
     height: 70,
   },
 });
-export default Routine;
+export default OtherRoutine;

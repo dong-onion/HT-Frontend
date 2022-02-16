@@ -6,12 +6,13 @@ import SignInStack from './SignInStack';
 import SignUpStack from './SignUpStack';
 import FollowTopTab from './FollowTopTab';
 import WorkoutStack from './WorkoutStack';
-
+import SplashStack from './SplashStack';
 const Stack = createNativeStackNavigator();
 
 const RootStack = () => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="SplashStack" component={SplashStack} />
       <Stack.Screen name="SignInStack" component={SignInStack} />
       <Stack.Screen name="SignUpStack" component={SignUpStack} />
       <Stack.Screen name="FollowTopTab" component={FollowTopTab} />

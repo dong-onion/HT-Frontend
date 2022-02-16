@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 
-const WorkoutListItem = ({ name, id, weight, set, count, onDelete }) => {
+const WorkoutListItem = ({ name, id, weight, set, count, onDelete, onFix }) => {
   return (
     <>
       <View style={styles.body}>
@@ -11,7 +11,7 @@ const WorkoutListItem = ({ name, id, weight, set, count, onDelete }) => {
         <Text style={styles.name}>{count}회</Text>
         <Text style={styles.name}>{set}세트</Text>
         <TouchableOpacity style={styles.icon} onPress={onDelete}>
-          <Icon name="delete" size={28} />
+          {onFix ? null : <Icon name="delete" size={28} />}
         </TouchableOpacity>
       </View>
     </>

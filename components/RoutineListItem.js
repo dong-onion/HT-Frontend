@@ -1,13 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, TouchableOpacity, View, Text } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 
-const RoutineListItem = ({ id, title, onPress, onDelete }) => {
+const RoutineListItem = ({ id, title, onPress, onDelete, onFix }) => {
   return (
     <TouchableOpacity style={styles.body} onPress={onPress}>
       <Text style={styles.name}>{title}</Text>
       <TouchableOpacity onPress={() => onDelete(id, title)}>
-        <Icon name="delete" size={28} />
+        {onFix ? null : <Icon name="delete" size={28} />}
       </TouchableOpacity>
     </TouchableOpacity>
   );

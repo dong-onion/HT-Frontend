@@ -3,6 +3,8 @@ import React from 'react';
 import MyWorkout from '../screens/MyWorkout';
 import Routine from '../screens/Routine';
 import SelectExercise from '../screens/SelectExercise';
+import OtherWorkout from '../screens/OtherWorkout';
+import OtherRoutine from '../screens/OtherRoutine';
 
 const Stack = createNativeStackNavigator();
 const WorkoutStack = () => {
@@ -11,6 +13,8 @@ const WorkoutStack = () => {
       <Stack.Screen name="MyWorkout" component={MyWorkout} />
       <Stack.Screen name="Routine" component={Routine} />
       <Stack.Screen name="SelectExercise" component={SelectExercise} />
+      <Stack.Screen name="OtherWorkout" component={OtherWorkout} />
+      <Stack.Screen name="OtherRoutine" component={OtherRoutine} />
     </Stack.Navigator>
   );
 };

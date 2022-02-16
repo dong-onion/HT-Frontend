@@ -3,25 +3,28 @@ import makeRequest from '../../function/makeRequest';
 
 export const setAction = createAction(
   'workout/action',
-  (uniqueNum, type, weight, count, set, name) => {
-    return { payload: { uniqueNum, type, weight, count, set, name } };
+  (type, weight, count, set, name) => {
+    return { payload: { type, weight, count, set, name } };
   },
 );
 // export const setTitleTime = createAction('workout/title', (title, time) => {
 //   return { payload: { title, time } };
 // });
-export const deleteAction = createAction('workout/deleteAction', uniqueNum => {
-  return { payload: { uniqueNum } };
-});
+export const deleteAction = createAction(
+  'workout/deleteAction',
+  exerciseHistoryId => {
+    return { payload: { exerciseHistoryId } };
+  },
+);
 export const getMyWorkoutList = createAsyncThunk(
   'workout/getMyWorkoutList',
-  async (userId, title) => {
+  async data => {
+    const { userId, title } = data;
     try {
-      const res = makeRequest({
+      const res = await makeRequest({
         method: 'GET',
-        url: `/users/{userId}/workout-list/${title}`,
+        url: `/users/${userId}/workout-list/${title}`,
       });
-      console.log(res.data);
       return res.data;
     } catch (e) {
       console.log('getMyWorkoutList error :', e);

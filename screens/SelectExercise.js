@@ -1,7 +1,6 @@
 import SelectDropdown from 'react-native-select-dropdown';
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
-
 import NormalInput from '../components/NormalInput';
 import MaterialButton from '../components/MaterialButton';
 import { useDispatch } from 'react-redux';
@@ -19,12 +18,11 @@ const SelectExercise = ({ route, navigation }) => {
   const [weight, setWeight] = useState(0);
   const [count, setCount] = useState(0);
   const onPress = async () => {
-    const uniqueNum = Date.now();
-    dispatch(setAction(uniqueNum, type, weight, count, set, name));
+    dispatch(setAction(type, weight, count, set, name));
     navigation.navigate('Routine', { title, time });
     await makeRequest({
       method: 'POST',
-      url: '',
+      url: `/users/workout-list/workout/${title}`,
       data: {
         type,
         name,
@@ -32,7 +30,6 @@ const SelectExercise = ({ route, navigation }) => {
         count,
         set,
       },
-      //return ?? setID
     });
   };
   useEffect(() => {
@@ -56,7 +53,6 @@ const SelectExercise = ({ route, navigation }) => {
         <SelectDropdown
           data={part}
           onSelect={(selectedItem, index) => {
-            console.log(selectedItem, index);
             setType(selectedItem);
           }}
           defaultButtonText={'Select Type'}

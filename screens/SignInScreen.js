@@ -24,9 +24,10 @@ const SignInScreen = ({ navigation }) => {
       const token = response.data.data;
       if (token === null) {
         Alert.alert('존재하지 않는 계정입니다');
+        // navigation.navigate('Profile');
       } else {
         AsyncStorage.setItem('token', token);
-        navigation.navigate('Profile');
+        navigation.navigate('SplashStack', { screen: 'SplashScreen2' });
       }
     } catch (e) {
       console.log(e);

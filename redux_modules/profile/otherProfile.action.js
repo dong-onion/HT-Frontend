@@ -4,14 +4,14 @@ import makeRequest from '../../function/makeRequest';
 
 export const getOtherProfile = createAsyncThunk(
   'otherProfile/getOtherProfile',
-  async () => {
+  async userId => {
     try {
       const res = await makeRequest({
         method: 'GET',
-        // url: `/users/${userId}/profile`,
+        url: `/users/${userId}/profile`,
       });
       console.log('getOtherProfile :', res.data);
-      return res;
+      return res.data;
     } catch (error) {
       console.log('getOtherProfile :', error);
       return {};

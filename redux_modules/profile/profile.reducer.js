@@ -6,13 +6,13 @@ import {
   setAgeAction,
   setFollowAction,
   setHeightAciton,
-  SetNicknameAction,
+  SetNameAction,
   setWeightAciton,
   getMyProfile,
 } from './profile.action';
 
 const initialState = {
-  nickname: '',
+  name: '',
   age: '',
   weight: '',
   height: '',
@@ -28,9 +28,9 @@ const reducer = createReducer(initialState, {
     state.age = age;
     // state.age = action.payload.age;
   },
-  [SetNicknameAction.type]: (state, action) => {
-    const { nickname } = action.payload;
-    state.nickname = nickname;
+  [SetNameAction.type]: (state, action) => {
+    const { name } = action.payload;
+    state.name = name;
   },
   [setWeightAciton.type]: (state, action) => {
     const { weight } = action.payload;
@@ -52,8 +52,8 @@ const reducer = createReducer(initialState, {
     state = { ...state, loading: true, data: null, error: null };
   },
   [getMyProfile.fulfilled]: (state, action) => {
-    const { nickname, age, height, weight, profileState } = action.payload;
-    state.nickname = nickname;
+    const { name, age, height, weight, profileState } = action.payload;
+    state.name = name;
     state.age = age;
     state.height = height;
     state.weight = weight;

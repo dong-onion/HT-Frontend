@@ -10,7 +10,7 @@ import {
 import MaterialInput from './MaterialInput';
 import { TimePicker } from 'react-native-simple-time-picker';
 
-const WorkoutModal = ({ routineTitle, routineTime, isVisi, sendData }) => {
+const WorkoutModal = ({ isVisi, sendData }) => {
   const [title, setTitle] = useState('');
   const [hours, setHours] = useState(0);
   const [minutes, setMinutes] = useState(0);
@@ -22,10 +22,8 @@ const WorkoutModal = ({ routineTitle, routineTime, isVisi, sendData }) => {
     if (title === '' || hours * 60 + minutes === 0) {
       Alert.alert('루틴제목과 소요시간을 입력해주세요');
     } else {
-      routineTitle(title);
-      routineTime(hours * 60 + minutes);
       isVisi(false);
-      sendData();
+      sendData(title, hours * 60 + minutes);
     }
   };
   return (
