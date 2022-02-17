@@ -14,11 +14,6 @@ const FollowingListItem = ({ user }) => {
           <Text style={styles.nickname}>{user.nickname}</Text>
         </View>
       </View>
-      <FollowButton
-        style={styles.button}
-        text="팔로우"
-        isFollowing={user.isFollowing}
-      />
     </View>
   );
 };

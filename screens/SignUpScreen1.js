@@ -8,6 +8,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { useDispatch } from 'react-redux';
 import { setEmail, setPassword } from '../redux_modules/signUp';
 import { TextField, FilledTextField } from 'rn-material-ui-textfield';
+import { checkEmail } from '../lib/signUpAPI';
 
 const SignUpScreen = () => {
   const navigation = useNavigation();
@@ -31,6 +32,8 @@ const SignUpScreen = () => {
     if (!localEmail) {
       const e = { ...errors, email: '이메일을 입력해주세요.' };
       setErrors(e);
+    } else if (false) {
+      //await checkEmail();
     }
     // 비밀번호 유효성 확인
     else if (!localPassword) {

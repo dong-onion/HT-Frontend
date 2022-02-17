@@ -55,10 +55,12 @@ const SignUpScreen2 = () => {
         dispatch(requestSignUp(signUpState));
       } else if (loading) {
         console.log(loading);
-      } else {
-        console.log(loading);
-        console.log(response);
+      } else if (error) {
         console.log(error);
+      } else if (response.data.result === 'FAIL') {
+        console.log('실패');
+      } else {
+        console.log(response.data);
         navigation.navigate('MainBottomTab');
       }
     }

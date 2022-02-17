@@ -3,7 +3,9 @@ import { ScrollView } from 'react-native';
 import CustomCalendar from '../components/Calendar';
 import TodoList from '../components/TodoList';
 import { StyleSheet } from 'react-native';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { getCalendar } from '../redux_modules/calendar';
+import AddButton from '../components/AddButton';
 
 const workoutList = [
   {
@@ -42,8 +44,17 @@ const getWorkout = date => {
 };
 
 const CalendarScreen = () => {
+  const dispatch = useDispatch();
   const selectedDay = useSelector(state => state.day);
   const [workout, setWorkout] = useState(null);
+  const { response, error, loading } = useSelector(state => state.calendar);
+
+  useEffect(() => {
+    console.log('캘린더 정보 수신');
+    //dispatch(getCalendar());
+  }, []);
+
+  useEffect(() => {});
 
   useEffect(() => {
     setWorkout(getWorkout(selectedDay)?.workout);
@@ -52,15 +63,16 @@ const CalendarScreen = () => {
   return (
     <>
       <CustomCalendar />
-      <ScrollView style={styles.container}>
+      <ScrollView contentContainerStyle={styles.container}>
         <TodoList workout={workout} />
+        <AddButton />
       </ScrollView>
     </>
   );
 };
 
 const styles = StyleSheet.create({
-  container: { paddingTop: 10 },
+  container: { paddingTop: 10, alignItems: 'center' },
 });
 
 export default CalendarScreen;

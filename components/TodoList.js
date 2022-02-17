@@ -12,7 +12,7 @@ const TodoList = ({ workout }) => {
           name={item.name}
           count={item.count}
           set={item.set}
-          timer={item.timer}
+          time={item.timer}
         />
       ))}
     </View>
