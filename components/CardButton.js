@@ -3,12 +3,10 @@ import { StyleSheet, Pressable, Text } from 'react-native';
 import { API } from '../lib/API';
 import axios from 'axios';
 
-const onPress = () => {};
-
-const CardButton = ({ style }) => {
+const CardButton = ({ style, onPress, text }) => {
   return (
     <Pressable style={[styles.container, style]} onPress={onPress}>
-      <Text style={styles.text}>시작</Text>
+      <Text style={styles.text}>{text}</Text>
     </Pressable>
   );
 };
