@@ -1,28 +1,28 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import CardButton from './CardButton';
 
-const TodoCard = ({ style, name, count, set, time }) => {
+const TodoCard = ({
+  style,
+  name,
+  count,
+  set,
+  time,
+  startTimer,
+  stopTimer,
+  id,
+}) => {
   const [isRunning, setIsRunning] = useState(false);
-
-  // const onPress = () => {
-  //   if (isRunning) {
-  //     clearInterval(timer.current);
-  //   } else {
-  //     timer.current = setInterval(() => {
-  //       console.log(localTime);
-  //       setLocalTime(time => time + 1);
-  //     }, 1000);
-  //   }
-  //   setIsRunning(!isRunning);
-  // };
   const [localTime, setLocalTime] = useState(0);
-  const timer = useRef(null);
+
   const onPress = () => {
-    timer.current = setInterval(() => {
-      console.log(localTime);
-      setLocalTime(time + 1);
-    }, 1000);
+    if (isRunning) {
+      stopTimer();
+      setIsRunning(false);
+    } else {
+      startTimer(id);
+      setIsRunning(true);
+    }
   };
 
   return (
@@ -30,7 +30,7 @@ const TodoCard = ({ style, name, count, set, time }) => {
       <Text style={styles.nameText}>{name}</Text>
       <Text style={styles.countText}>{count + '회'}</Text>
       <Text style={styles.setText}>{set + '세트'}</Text>
-      <Text style={styles.timeText}>{localTime + '초'}</Text>
+      <Text style={styles.timeText}>{time + '초'}</Text>
       {isRunning ? (
         <CardButton style={styles.button} onPress={onPress} text="중지" />
       ) : (

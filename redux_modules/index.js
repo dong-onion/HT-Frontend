@@ -7,14 +7,14 @@ import profileImage from './profileImage';
 import reducer from './profile/profile.reducer';
 import otherProfileReducer from './profile/otherProfile.reducer';
 import workoutReducer from './workout/workout.reducer';
-import day from './day';
+import date from './date';
 import calendar from './calendar';
 
 const rootReducer = combineReducers({
   signUp,
   signUpAPI,
   profileImage,
-  day,
+  date,
   calendar,
   profile: reducer,
   otherProfile: otherProfileReducer,

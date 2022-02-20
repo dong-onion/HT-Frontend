@@ -1,9 +1,9 @@
 import React from 'react';
 import { View, StyleSheet, Pressable, Text } from 'react-native';
 
-const AddButton = ({ style }) => {
+const AddButton = ({ style, onPress }) => {
   return (
-    <Pressable style={[styles.container, style]}>
+    <Pressable style={[styles.container, style]} onPress={onPress}>
       <Text style={styles.text}>추가하기</Text>
     </Pressable>
   );

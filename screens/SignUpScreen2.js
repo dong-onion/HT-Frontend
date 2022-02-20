@@ -47,6 +47,7 @@ const SignUpScreen2 = () => {
   const dispatch = useDispatch();
 
   const mounted = useRef();
+
   useEffect(() => {
     if (!mounted.current) {
       mounted.current = true;
@@ -58,8 +59,10 @@ const SignUpScreen2 = () => {
       } else if (error) {
         console.log(error);
       } else if (response.data.result === 'FAIL') {
+        console.log(signUpState);
         console.log('실패');
       } else {
+        console.log(response);
         console.log(response.data);
         navigation.navigate('MainBottomTab');
       }

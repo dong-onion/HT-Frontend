@@ -1,15 +1,15 @@
-const SET_DAY = 'day/SET_DAY';
+const SET_DATE = 'date/SET_DATE';
 
-export const setDay = day => ({ type: SET_DAY, day });
+export const setDate = date => ({ type: SET_DATE, date });
 
 const initialState = {
-  day: null,
+  date: null,
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case SET_DAY:
-      return { day: action.day };
+    case SET_DATE:
+      return { date: action.date };
     default:
       return state;
   }
