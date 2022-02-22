@@ -8,11 +8,12 @@ const NormalInput = ({
   value,
   keyboardType,
   children,
+  width,
 }) => {
   return (
     <View style={styles.body}>
       <TextInput
-        style={styles.input}
+        style={[styles.input, { width: width }]}
         placeholder={placeholder}
         onChangeText={onChangeText}
         value={value}
@@ -29,7 +30,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   input: {
-    width: 320,
     backgroundColor: 'white',
     marginBottom: 20,
     borderBottomWidth: 2,

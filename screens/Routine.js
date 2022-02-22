@@ -7,7 +7,6 @@ import {
   FlatList,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
-
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import MaterialButton from '../components/MaterialButton';
 import WorkoutListItem from '../components/WorkoutListItem';

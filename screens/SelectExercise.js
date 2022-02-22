@@ -64,6 +64,7 @@ const SelectExercise = ({ route, navigation }) => {
           placeholder="어떤 운동을 하실거에요?"
           value={name}
           onChangeText={setName}
+          width={320}
         />
         <NormalInput
           placeholder="무게를 알려주세요"
@@ -71,6 +72,7 @@ const SelectExercise = ({ route, navigation }) => {
           keyboardType="number-pad"
           onChangeText={setWeight}
           children="kg"
+          width={320}
         />
         <NormalInput
           placeholder="개수를 알려주세요"
@@ -78,6 +80,7 @@ const SelectExercise = ({ route, navigation }) => {
           onChangeText={setCount}
           keyboardType="number-pad"
           children="개"
+          width={320}
         />
         <NormalInput
           placeholder="세트 수 를 알려주세요"
@@ -85,6 +88,7 @@ const SelectExercise = ({ route, navigation }) => {
           onChangeText={setSet}
           keyboardType="number-pad"
           children="개"
+          width={320}
         />
       </View>
       <View style={styles.Btn}>
