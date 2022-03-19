@@ -43,7 +43,9 @@ const SearchGroup = () => {
         <FlatList
           keyExtractor={item => item.teamId}
           data={groupList}
-          renderItem={({ item }) => <GroupListItem title={item.teamName} />}
+          renderItem={({ item }) => (
+            <GroupListItem title={item.teamName} id={item.teamId} />
+          )}
         />
       </View>
     </KeyboardAwareScrollView>
@@ -71,7 +73,6 @@ const styles = StyleSheet.create({
   },
   groupList: {
     flex: 6,
-    backgroundColor: 'tomato',
   },
 });
 
