@@ -1,15 +1,41 @@
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import CardButton from './CardButton';
 
-const TodoCard = ({ style, name, count, set, timer }) => {
+const TodoCard = ({
+  style,
+  name,
+  count,
+  set,
+  time,
+  startTimer,
+  stopTimer,
+  id,
+}) => {
+  const [isRunning, setIsRunning] = useState(false);
+  const [localTime, setLocalTime] = useState(0);
+
+  const onPress = () => {
+    if (isRunning) {
+      stopTimer();
+      setIsRunning(false);
+    } else {
+      startTimer(id);
+      setIsRunning(true);
+    }
+  };
+
   return (
     <View style={[styles.container, style]}>
       <Text style={styles.nameText}>{name}</Text>
       <Text style={styles.countText}>{count + '회'}</Text>
       <Text style={styles.setText}>{set + '세트'}</Text>
-      <Text style={styles.timeText}>{timer + '초'}</Text>
-      <CardButton style={styles.button} />
+      <Text style={styles.timeText}>{time + '초'}</Text>
+      {isRunning ? (
+        <CardButton style={styles.button} onPress={onPress} text="중지" />
+      ) : (
+        <CardButton style={styles.button} onPress={onPress} text="시작" />
+      )}
     </View>
   );
 };
