@@ -5,6 +5,7 @@ import Routine from '../screens/Routine';
 import SelectExercise from '../screens/SelectExercise';
 import OtherWorkout from '../screens/OtherWorkout';
 import OtherRoutine from '../screens/OtherRoutine';
+import GroupMemebersScreen from '../screens/GroupMemebersScreen';
 
 const Stack = createNativeStackNavigator();
 const WorkoutStack = () => {
@@ -15,6 +16,7 @@ const WorkoutStack = () => {
       <Stack.Screen name="SelectExercise" component={SelectExercise} />
       <Stack.Screen name="OtherWorkout" component={OtherWorkout} />
       <Stack.Screen name="OtherRoutine" component={OtherRoutine} />
+      <Stack.Screen name="GroupMembers" component={GroupMemebersScreen} />
     </Stack.Navigator>
   );
 };

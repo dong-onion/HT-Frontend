@@ -5,17 +5,21 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import GroupListItem from '../components/GroupListItem';
 import NormalInput from '../components/NormalInput';
 import makeRequest from '../function/makeRequest';
+
 const SearchGroup = () => {
   const [searchWord, setSearchWord] = useState('');
   const [isRender, setIsRender] = useState(true);
+
   const [groupList, setGroupList] = useState([
     {
       teamId: Date.now(),
       teamName: '어깡모임',
+      state: 'Y',
     },
     {
       teamId: 33213,
       teamName: '헬창이 되고싶나?',
+      state: 'N',
     },
   ]);
   const onSearch = async () => {
@@ -34,6 +38,7 @@ const SearchGroup = () => {
           width={280}
           value={searchWord}
           onChangeText={setSearchWord}
+          placeholder="찾으시는 그룹을 검색해주세요"
         />
         <TouchableOpacity style={styles.searchIcon} onPress={onSearch}>
           <Icon name="search" size={28} />
@@ -44,7 +49,11 @@ const SearchGroup = () => {
           keyExtractor={item => item.teamId}
           data={groupList}
           renderItem={({ item }) => (
-            <GroupListItem title={item.teamName} id={item.teamId} />
+            <GroupListItem
+              title={item.teamName}
+              id={item.teamId}
+              state={item.state}
+            />
           )}
         />
       </View>

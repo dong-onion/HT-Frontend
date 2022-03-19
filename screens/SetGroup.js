@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
   Alert,
@@ -15,7 +15,6 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import MyGroupList from '../components/MyGroupList';
 import NormalInput from '../components/NormalInput';
 import makeRequest from '../function/makeRequest';
-import { useFocusEffect } from '@react-navigation/native';
 
 const SetGroup = () => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -71,11 +70,10 @@ const SetGroup = () => {
     console.log('myGroup : ', myGroup);
   };
 
-  useFocusEffect(
-    useCallback(() => {
-      getMyGroup();
-    }, []),
-  );
+  useEffect(() => {
+    getMyGroup();
+  }, []);
+
   return (
     <KeyboardAwareScrollView style={styles.container}>
       <View style={styles.searchBox}>
@@ -144,7 +142,11 @@ const SetGroup = () => {
             keyExtractor={item => item.teamId}
             data={myGroup}
             renderItem={({ item }) => (
-              <MyGroupList id={item.teamId} title={item.teamName} />
+              <MyGroupList
+                id={item.teamId}
+                title={item.teamName}
+                userList={item.userList}
+              />
             )}
           />
         ) : (

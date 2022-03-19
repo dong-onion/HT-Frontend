@@ -18,11 +18,7 @@ const SignInStack = () => {
         component={ProfileScreen}
         options={{ title: '프로필' }}
       />
-      <Stack.Screen
-        name="MyProfile"
-        component={MyProfileScreen}
-        options={{ title: '내 프로필' }}
-      />
+      
       <Stack.Screen name="JsonScreen" component={JsonScreen} />
     </Stack.Navigator>
   );

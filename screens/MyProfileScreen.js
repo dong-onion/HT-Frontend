@@ -33,7 +33,7 @@ const MyProfileScreen = ({ navigation }) => {
   }, []);
 
   const postMyProfile = async () => {
-    navigation.navigate('JsonScreen');
+    navigation.navigate('Calendar');
     await makeRequest({
       method: 'POST',
       url: '/users/profile/me',

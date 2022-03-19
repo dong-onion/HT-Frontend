@@ -18,8 +18,8 @@ const RootStack = () => {
       <Stack.Screen name="SignInStack" component={SignInStack} />
       <Stack.Screen name="SignUpStack" component={SignUpStack} />
       <Stack.Screen name="FollowTopTab" component={FollowTopTab} />
-      <Stack.Screen name="WorkoutStack" component={WorkoutStack} />
       <Stack.Screen name="MainBottomTab" component={MainBottomTab} />
+      
     </Stack.Navigator>
   );
 };

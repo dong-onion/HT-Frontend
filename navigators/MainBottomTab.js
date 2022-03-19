@@ -5,6 +5,8 @@ import CalendarScreen from '../screens/CalendarScreen';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import IIcon from 'react-native-vector-icons/FontAwesome';
 import GroupTab from './GroupTab';
+import MyProfileScreen from '../screens/MyProfileScreen';
+import WorkoutStack from './WorkoutStack';
 
 const Tab = createBottomTabNavigator();
 
@@ -38,6 +40,26 @@ const MainBottomTab = () => {
           title: '그룹',
           tabBarIcon: ({ color, size }) => (
             <IIcon name="group" color={color} size={size} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="WorkoutStack"
+        component={WorkoutStack}
+        options={{
+          title: '운동리스트',
+          tabBarIcon: ({ color, size }) => (
+            <IIcon name="list" color={color} size={size} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="MyProfile"
+        component={MyProfileScreen}
+        options={{
+          title: '프로필',
+          tabBarIcon: ({ color, size }) => (
+            <IIcon name="user-secret" color={color} size={size} />
           ),
         }}
       />

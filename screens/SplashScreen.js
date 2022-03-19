@@ -19,7 +19,7 @@ const SplashScreen = ({ navigation }) => {
 			if (res.result === 'SUCCESS'){
 				const MyUserId = JSON.stringify(res.data);
 				AsyncStorage.setItem('MyUserId', MyUserId);
-				navigation.navigate('SignInStack', { screen : 'Profile'});
+				navigation.navigate('MainBottomTab', { screen : 'Calendar'});
 			} else {
 				navigation.navigate('SignInStack',{ screen : 'signIn'});
 			}

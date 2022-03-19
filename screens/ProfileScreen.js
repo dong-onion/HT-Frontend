@@ -100,9 +100,7 @@ const ProfileScreen = ({ navigation }) => {
       )}
 
       <View style={styles.BtnBox}>
-        <TouchableOpacity
-          style={styles.Btn}
-          onPress={() => navigation.navigate('MyProfile')}>
+        <TouchableOpacity style={styles.Btn} onPress={() => navigation.pop()}>
           <Text style={styles.textBtn}>확인</Text>
         </TouchableOpacity>
       </View>
